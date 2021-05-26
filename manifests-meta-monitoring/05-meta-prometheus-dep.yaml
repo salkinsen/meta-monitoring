@@ -1,0 +1,43 @@
+# TODO: make sure ports dont clash with normal monitoring
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meta-prometheus-deployment
+  namespace: meta-monitoring
+spec:
+  replicas: 1
+  # strategy:
+  #   rollingUpdate:
+  #     maxSurge: 0
+  #     maxUnavailable: 1
+  #   type: RollingUpdate
+  selector:
+    matchLabels:
+      app: meta-prometheus
+  template:
+    metadata:
+      name: meta-prometheus
+      labels:
+        app: meta-prometheus
+    spec:
+      serviceAccount: meta-prometheus
+      containers:
+      - name: meta-prometheus
+        image: prom/prometheus:v2.27.0
+        # args:
+        # - '-storage.local.retention=360h'
+        # - '-storage.local.memory-chunks=1048576'
+        # - '-config.file=/etc/prometheus/prometheus.yml'
+        # - '-alertmanager.url=http://alertmanager:9093'
+        ports:
+        - name: default
+          containerPort: 9090
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/prometheus
+      volumes:
+      - name: config-volume
+        configMap:
+          name: meta-prometheus-configmap

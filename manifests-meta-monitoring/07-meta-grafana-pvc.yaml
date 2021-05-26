@@ -1,0 +1,13 @@
+# adapted from https://grafana.com/docs/grafana/latest/installation/kubernetes/
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: meta-grafana-pvc
+  namespace: meta-monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
