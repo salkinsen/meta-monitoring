@@ -8,12 +8,19 @@ From within the respective folders:
 
 ### Elastic Search
 
+*for minikube:*  
+cd examples/minikube/  
 make install  
-make purge
+make purge  
+
+*default:*  
+helm install elasticsearch .  
+helm uninstall elasticsearch
 
 #### Kibana
 
 helm install kibana .  
+*for minikube:* kubectl port-forward svc/kibana-kibana :5601  
 helm uninstall kibana
 
 #### Logstash
