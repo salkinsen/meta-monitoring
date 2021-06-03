@@ -13,3 +13,6 @@ Stop the nodes with "minikube stop" and in VirtualBox, set the resources for
     - CPus = 2, memory = 3000 MB. 
 
 Only do this if the system has enough resources left afterwards for normal operation. Then restart with "minikube start".
+
+## Test with kind
+kind create cluster --config kind-config.yaml
