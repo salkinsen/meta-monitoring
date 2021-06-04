@@ -44,6 +44,15 @@ spec:
       annotations:
         
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: layer
+                operator: NotIn
+                values:
+                - meta-monitoring
       securityContext:
         fsGroup: 1000
       volumes:

@@ -20,6 +20,7 @@ kind create cluster --config kind-config.yaml
 ## assign one node as meta-monitoring-node
 kubectl get nodes  
 kubectl label nodes \<node-name\> layer=meta-monitoring  
+z.B. kubectl label nodes kind-worker layer=meta-monitoring  
 (  
 to verify:  
 kubectl get nodes --show-labels  

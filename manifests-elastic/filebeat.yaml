@@ -128,8 +128,15 @@ spec:
         []
       nodeSelector: 
         {}
-      affinity: 
-        {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: layer
+                operator: NotIn
+                values:
+                - meta-monitoring
       serviceAccountName: filebeat-filebeat
       terminationGracePeriodSeconds: 30
       volumes:
