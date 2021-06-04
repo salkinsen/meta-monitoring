@@ -15,7 +15,10 @@ Stop the nodes with "minikube stop" and in VirtualBox, set the resources for
 Only do this if the system has enough resources left afterwards for normal operation. Then restart with "minikube start".
 
 ## Test with kind
-kind create cluster --config kind-config.yaml
+kind create cluster --config kind-config.yaml  
+load images into cluster if present:  
+kind load docker-image docker.elastic.co/elasticsearch/elasticsearch:7.13.0 docker.elastic.co/beats/filebeat:7.13.0 docker.elastic.co/kibana/kibana:7.13.0 docker.elastic.co/beats/metricbeat:7.13.0
+
 
 ## assign one node as meta-monitoring-node
 kubectl get nodes  
