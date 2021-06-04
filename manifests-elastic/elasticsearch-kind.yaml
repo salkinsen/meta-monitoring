@@ -77,7 +77,7 @@ spec:
   selector:
     matchLabels:
       app: "elasticsearch-master"
-  replicas: 3
+  replicas: 1
   podManagementPolicy: Parallel
   updateStrategy:
     type: RollingUpdate
@@ -238,7 +238,7 @@ spec:
           - name: network.host
             value: "0.0.0.0"
           - name: ES_JAVA_OPTS
-            value: "-Xmx128m -Xms128m"
+            value: "-Xmx1g -Xms1g"
           - name: node.data
             value: "true"
           - name: node.ingest
