@@ -21,8 +21,15 @@ spec:
       name: meta-prometheus
       labels:
         app: meta-prometheus
+        layer: meta-monitoring
     spec:
       serviceAccount: meta-prometheus
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions: [{ key: layer, operator: In, values: [ms-shop-observed] }]
+            topologyKey: "kubernetes.io/hostname"
       containers:
       - name: meta-prometheus
         image: prom/prometheus:v2.27.0

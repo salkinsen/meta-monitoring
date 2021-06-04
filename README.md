@@ -16,3 +16,13 @@ Only do this if the system has enough resources left afterwards for normal opera
 
 ## Test with kind
 kind create cluster --config kind-config.yaml
+
+## assign one node as meta-monitoring-node
+kubectl get nodes  
+kubectl label nodes \<node-name\> layer=meta-monitoring  
+(  
+to verify:  
+kubectl get nodes --show-labels  
+or  
+kubectl describe node "nodename"  
+)

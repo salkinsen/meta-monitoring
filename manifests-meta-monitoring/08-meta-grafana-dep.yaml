@@ -14,11 +14,23 @@ spec:
     metadata:
       labels:
         app: meta-grafana
+        layer: meta-monitoring
     spec:
       securityContext:
         fsGroup: 472
         supplementalGroups:
         - 0    
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions: [{ key: layer, operator: In, values: [ms-shop-observed] }]
+            topologyKey: "kubernetes.io/hostname"
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions: [{ key: app, operator: In, values: [meta-prometheus] }]
+            topologyKey: "kubernetes.io/hostname"
       containers:
         - name: meta-grafana
           image: grafana/grafana:7.5.2
