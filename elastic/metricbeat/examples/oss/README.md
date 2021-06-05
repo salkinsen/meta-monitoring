@@ -1,6 +1,6 @@
 # OSS
 
-This example deploy Metricbeat 7.13.0 using [Metricbeat OSS][] version.
+This example deploy Metricbeat 7.11.2 using [Metricbeat OSS][] version.
 
 
 ## Usage
@@ -23,5 +23,5 @@ You can also run [goss integration tests][] using `make test`
 
 
 [metricbeat oss]: https://www.elastic.co/downloads/beats/metricbeat-oss
-[elasticsearch helm chart]: https://github.com/elastic/helm-charts/tree/7.13/elasticsearch/examples/oss/
-[goss integration tests]: https://github.com/elastic/helm-charts/tree/7.13/metricbeat/examples/oss/test/goss.yaml
+[elasticsearch helm chart]: https://github.com/elastic/helm-charts/tree/7.11/elasticsearch/examples/oss/
+[goss integration tests]: https://github.com/elastic/helm-charts/tree/7.11/metricbeat/examples/oss/test/goss.yaml

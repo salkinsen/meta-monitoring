@@ -35,7 +35,7 @@ hostAliases: []
 #  - "bar.local"
 
 image: "docker.elastic.co/kibana/kibana"
-imageTag: "7.13.0"
+imageTag: "7.11.2"
 imagePullPolicy: "IfNotPresent"
 
 # additionals labels
@@ -139,7 +139,15 @@ readinessProbe:
 imagePullSecrets: []
 nodeSelector: {}
 tolerations: []
-affinity: {}
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: layer
+          operator: NotIn
+          values:
+          - meta-monitoring
 
 nameOverride: ""
 fullnameOverride: ""

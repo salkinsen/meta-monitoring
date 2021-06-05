@@ -44,6 +44,9 @@ spec:
       annotations:
         
     spec:
+      securityContext:
+        fsGroup: 1000
+      volumes:
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -53,9 +56,6 @@ spec:
                 operator: NotIn
                 values:
                 - meta-monitoring
-      securityContext:
-        fsGroup: 1000
-      volumes:
       containers:
       - name: kibana
         securityContext:
@@ -64,7 +64,7 @@ spec:
             - ALL
           runAsNonRoot: true
           runAsUser: 1000
-        image: "docker.elastic.co/kibana/kibana:7.13.0"
+        image: "docker.elastic.co/kibana/kibana:7.11.2"
         imagePullPolicy: "IfNotPresent"
         env:
           - name: ELASTICSEARCH_HOSTS

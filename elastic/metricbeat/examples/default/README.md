@@ -1,6 +1,6 @@
 # Default
 
-This example deploy Metricbeat 7.13.0 using [default values][].
+This example deploy Metricbeat 7.11.2 using [default values][].
 
 
 ## Usage
@@ -22,6 +22,6 @@ This example deploy Metricbeat 7.13.0 using [default values][].
 You can also run [goss integration tests][] using `make test`
 
 
-[elasticsearch helm chart]: https://github.com/elastic/helm-charts/tree/7.13/elasticsearch/examples/default/
-[goss integration tests]: https://github.com/elastic/helm-charts/tree/7.13/metricbeat/examples/default/test/goss.yaml
-[default values]: https://github.com/elastic/helm-charts/tree/7.13/metricbeat/values.yaml
+[elasticsearch helm chart]: https://github.com/elastic/helm-charts/tree/7.11/elasticsearch/examples/default/
+[goss integration tests]: https://github.com/elastic/helm-charts/tree/7.11/metricbeat/examples/default/test/goss.yaml
+[default values]: https://github.com/elastic/helm-charts/tree/7.11/metricbeat/values.yaml

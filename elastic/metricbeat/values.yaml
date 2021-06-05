@@ -5,7 +5,15 @@ daemonset:
   annotations: {}
   # additionals labels
   labels: {}
-  affinity: {}
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: layer
+            operator: NotIn
+            values:
+            - meta-monitoring
   # Include the daemonset
   enabled: true
   # Extra environment variables for Metricbeat container.
@@ -106,7 +114,15 @@ deployment:
   annotations: {}
   # additionals labels
   labels: {}
-  affinity: {}
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: layer
+            operator: NotIn
+            values:
+            - meta-monitoring
   # Include the deployment
   enabled: true
   # Extra environment variables for Metricbeat container.
@@ -181,7 +197,7 @@ extraInitContainers: ""
 hostPathRoot: /var/lib
 
 image: "docker.elastic.co/beats/metricbeat"
-imageTag: "7.13.0"
+imageTag: "7.11.2"
 imagePullPolicy: "IfNotPresent"
 imagePullSecrets: []
 
@@ -262,7 +278,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 kube_state_metrics:
-  enabled: true
+  enabled: false
   # host is used only when kube_state_metrics.enabled: false
   host: ""
 

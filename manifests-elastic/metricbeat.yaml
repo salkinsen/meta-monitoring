@@ -1,17 +1,4 @@
 ---
-# Source: metricbeat/charts/kube-state-metrics/templates/serviceaccount.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  labels:
-    app.kubernetes.io/name: kube-state-metrics
-    helm.sh/chart: kube-state-metrics-2.4.1
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/instance: metricbeat
-  name: metricbeat-kube-state-metrics
-imagePullSecrets:
-  []
----
 # Source: metricbeat/templates/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
@@ -20,7 +7,7 @@ metadata:
   annotations:
   labels:
     app: "metricbeat-metricbeat"
-    chart: "metricbeat-7.13.0"
+    chart: "metricbeat-7.11.2"
     heritage: "Helm"
     release: "metricbeat"
 ---
@@ -31,7 +18,7 @@ metadata:
   name: metricbeat-metricbeat-daemonset-config
   labels:
     app: "metricbeat-metricbeat"
-    chart: "metricbeat-7.13.0"
+    chart: "metricbeat-7.11.2"
     heritage: "Helm"
     release: "metricbeat"
 data:
@@ -90,7 +77,7 @@ metadata:
   name: metricbeat-metricbeat-deployment-config
   labels:
     app: "metricbeat-metricbeat"
-    chart: "metricbeat-7.13.0"
+    chart: "metricbeat-7.11.2"
     heritage: "Helm"
     release: "metricbeat"
 data:
@@ -109,133 +96,6 @@ data:
     output.elasticsearch:
       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
 ---
-# Source: metricbeat/charts/kube-state-metrics/templates/clusterrole.yaml
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/name: kube-state-metrics
-    helm.sh/chart: kube-state-metrics-2.4.1
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/instance: metricbeat
-  name: metricbeat-kube-state-metrics
-rules:
-
-- apiGroups: ["certificates.k8s.io"]
-  resources:
-  - certificatesigningrequests
-  verbs: ["list", "watch"]
-
-- apiGroups: [""]
-  resources:
-  - configmaps
-  verbs: ["list", "watch"]
-
-- apiGroups: ["batch"]
-  resources:
-  - cronjobs
-  verbs: ["list", "watch"]
-
-- apiGroups: ["extensions", "apps"]
-  resources:
-  - daemonsets
-  verbs: ["list", "watch"]
-
-- apiGroups: ["extensions", "apps"]
-  resources:
-  - deployments
-  verbs: ["list", "watch"]
-
-- apiGroups: [""]
-  resources:
-  - endpoints
-  verbs: ["list", "watch"]
-
-- apiGroups: ["autoscaling"]
-  resources:
-  - horizontalpodautoscalers
-  verbs: ["list", "watch"]
-
-- apiGroups: ["extensions", "networking.k8s.io"]
-  resources:
-  - ingresses
-  verbs: ["list", "watch"]
-
-- apiGroups: ["batch"]
-  resources:
-  - jobs
-  verbs: ["list", "watch"]
-
-- apiGroups: [""]
-  resources:
-  - limitranges
-  verbs: ["list", "watch"]
-
-- apiGroups: [""]
-  resources:
-  - namespaces
-  verbs: ["list", "watch"]
-
-- apiGroups: [""]
-  resources:
-  - nodes
-  verbs: ["list", "watch"]
-
-- apiGroups: [""]
-  resources:
-  - persistentvolumeclaims
-  verbs: ["list", "watch"]
-
-- apiGroups: [""]
-  resources:
-  - persistentvolumes
-  verbs: ["list", "watch"]
-
-- apiGroups: ["policy"]
-  resources:
-    - poddisruptionbudgets
-  verbs: ["list", "watch"]
-
-- apiGroups: [""]
-  resources:
-  - pods
-  verbs: ["list", "watch"]
-
-- apiGroups: ["extensions", "apps"]
-  resources:
-  - replicasets
-  verbs: ["list", "watch"]
-
-- apiGroups: [""]
-  resources:
-  - replicationcontrollers
-  verbs: ["list", "watch"]
-
-- apiGroups: [""]
-  resources:
-  - resourcequotas
-  verbs: ["list", "watch"]
-
-- apiGroups: [""]
-  resources:
-  - secrets
-  verbs: ["list", "watch"]
-
-- apiGroups: [""]
-  resources:
-  - services
-  verbs: ["list", "watch"]
-
-- apiGroups: ["apps"]
-  resources:
-  - statefulsets
-  verbs: ["list", "watch"]
-
-- apiGroups: ["storage.k8s.io"]
-  resources:
-    - storageclasses
-  verbs: ["list", "watch"]
----
 # Source: metricbeat/templates/clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -243,7 +103,7 @@ metadata:
   name: metricbeat-metricbeat-cluster-role
   labels:
     app: "metricbeat-metricbeat"
-    chart: "metricbeat-7.13.0"
+    chart: "metricbeat-7.11.2"
     heritage: "Helm"
     release: "metricbeat"
 rules: 
@@ -283,25 +143,6 @@ rules:
     verbs:
     - get
 ---
-# Source: metricbeat/charts/kube-state-metrics/templates/clusterrolebinding.yaml
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  labels:
-    app.kubernetes.io/name: kube-state-metrics
-    helm.sh/chart: kube-state-metrics-2.4.1
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/instance: metricbeat
-  name: metricbeat-kube-state-metrics
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: metricbeat-kube-state-metrics
-subjects:
-- kind: ServiceAccount
-  name: metricbeat-kube-state-metrics
-  namespace: default
----
 # Source: metricbeat/templates/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -309,7 +150,7 @@ metadata:
   name: metricbeat-metricbeat-cluster-role-binding
   labels:
     app: "metricbeat-metricbeat"
-    chart: "metricbeat-7.13.0"
+    chart: "metricbeat-7.11.2"
     heritage: "Helm"
     release: "metricbeat"
 roleRef:
@@ -321,29 +162,6 @@ subjects:
   name: metricbeat-metricbeat
   namespace: default
 ---
-# Source: metricbeat/charts/kube-state-metrics/templates/service.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: metricbeat-kube-state-metrics
-  labels:
-    app.kubernetes.io/name: kube-state-metrics
-    helm.sh/chart: "kube-state-metrics-2.4.1"
-    app.kubernetes.io/instance: "metricbeat"
-    app.kubernetes.io/managed-by: "Helm"
-  annotations:
-    prometheus.io/scrape: 'true'
-spec:
-  type: "ClusterIP"
-  ports:
-  - name: "http"
-    protocol: TCP
-    port: 8080
-    targetPort: 8080
-  selector:
-    app.kubernetes.io/name: kube-state-metrics
-    app.kubernetes.io/instance: metricbeat
----
 # Source: metricbeat/templates/daemonset.yaml
 apiVersion: apps/v1
 kind: DaemonSet
@@ -351,7 +169,7 @@ metadata:
   name: metricbeat-metricbeat
   labels:
     app: "metricbeat-metricbeat"
-    chart: "metricbeat-7.13.0"
+    chart: "metricbeat-7.11.2"
     heritage: "Helm"
     release: "metricbeat"
 spec:
@@ -365,15 +183,15 @@ spec:
     metadata:
       annotations:
         
-        configChecksum: d93e8ac94ba04387074c951d991bb79e022851e83cd5b9cda37197939797df1
+        configChecksum: 602d9a7454d28c365352a9d4abdad368abd549bc16342ab0eacd4ebe623218f
       name: "metricbeat-metricbeat"
       labels:
         app: "metricbeat-metricbeat"
-        chart: "metricbeat-7.13.0"
+        chart: "metricbeat-7.11.2"
         heritage: "Helm"
         release: "metricbeat"
     spec:
-      affinity:
+      affinity: 
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
@@ -408,7 +226,7 @@ spec:
           path: /sys/fs/cgroup
       containers:
       - name: "metricbeat"
-        image: "docker.elastic.co/beats/metricbeat:7.13.0"
+        image: "docker.elastic.co/beats/metricbeat:7.11.2"
         imagePullPolicy: "IfNotPresent"
         args:
         - "-e"
@@ -468,7 +286,7 @@ spec:
         - name: data
           mountPath: /usr/share/metricbeat/data
         # Necessary when using autodiscovery; avoid mounting it otherwise
-        # See: https://www.elastic.co/guide/en/beats/metricbeat/7.13/configuration-autodiscover.html
+        # See: https://www.elastic.co/guide/en/beats/metricbeat/7.11/configuration-autodiscover.html
         - name: varrundockersock
           mountPath: /var/run/docker.sock
           readOnly: true
@@ -479,132 +297,6 @@ spec:
           mountPath: /hostfs/sys/fs/cgroup
           readOnly: true
 ---
-# Source: metricbeat/charts/kube-state-metrics/templates/deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: metricbeat-kube-state-metrics
-  labels:
-    app.kubernetes.io/name: kube-state-metrics
-    helm.sh/chart: "kube-state-metrics-2.4.1"
-    app.kubernetes.io/instance: "metricbeat"
-    app.kubernetes.io/managed-by: "Helm"
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: kube-state-metrics
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: kube-state-metrics
-        app.kubernetes.io/instance: "metricbeat"
-    spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: layer
-                operator: NotIn
-                values:
-                - meta-monitoring
-      hostNetwork: false
-      serviceAccountName: metricbeat-kube-state-metrics
-      securityContext:
-        fsGroup: 65534
-        runAsUser: 65534
-      containers:
-      - name: kube-state-metrics
-        args:
-
-        - --collectors=certificatesigningrequests
-
-
-        - --collectors=configmaps
-
-
-        - --collectors=cronjobs
-
-
-        - --collectors=daemonsets
-
-
-        - --collectors=deployments
-
-
-        - --collectors=endpoints
-
-
-        - --collectors=horizontalpodautoscalers
-
-
-        - --collectors=ingresses
-
-
-        - --collectors=jobs
-
-
-        - --collectors=limitranges
-
-
-        - --collectors=namespaces
-
-
-        - --collectors=nodes
-
-
-        - --collectors=persistentvolumeclaims
-
-
-        - --collectors=persistentvolumes
-
-
-        - --collectors=poddisruptionbudgets
-
-
-        - --collectors=pods
-
-
-        - --collectors=replicasets
-
-
-        - --collectors=replicationcontrollers
-
-
-        - --collectors=resourcequotas
-
-
-        - --collectors=secrets
-
-
-        - --collectors=services
-
-
-        - --collectors=statefulsets
-
-
-        - --collectors=storageclasses
-
-
-
-        imagePullPolicy: IfNotPresent
-        image: "quay.io/coreos/kube-state-metrics:v1.8.0"
-        ports:
-        - containerPort: 8080
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8080
-          initialDelaySeconds: 5
-          timeoutSeconds: 5
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          initialDelaySeconds: 5
-          timeoutSeconds: 5
----
 # Source: metricbeat/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -612,7 +304,7 @@ metadata:
   name: 'metricbeat-metricbeat-metrics'
   labels:
     app: 'metricbeat-metricbeat-metrics'
-    chart: 'metricbeat-7.13.0'
+    chart: 'metricbeat-7.11.2'
     heritage: 'Helm'
     release: 'metricbeat'
 spec:
@@ -625,13 +317,13 @@ spec:
     metadata:
       annotations:
         
-        configChecksum: d93e8ac94ba04387074c951d991bb79e022851e83cd5b9cda37197939797df1
+        configChecksum: 602d9a7454d28c365352a9d4abdad368abd549bc16342ab0eacd4ebe623218f
       labels:
         app: 'metricbeat-metricbeat-metrics'
-        chart: 'metricbeat-7.13.0'
+        chart: 'metricbeat-7.11.2'
         release: 'metricbeat'
     spec:
-      affinity:
+      affinity: 
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
@@ -653,7 +345,7 @@ spec:
           name: metricbeat-metricbeat-deployment-config
       containers:
       - name: "metricbeat"
-        image: "docker.elastic.co/beats/metricbeat:7.13.0"
+        image: "docker.elastic.co/beats/metricbeat:7.11.2"
         imagePullPolicy: "IfNotPresent"
         args:
           - "-e"
@@ -696,7 +388,7 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         - name: KUBE_STATE_METRICS_HOSTS
-          value: "$(METRICBEAT_KUBE_STATE_METRICS_SERVICE_HOST):$(METRICBEAT_KUBE_STATE_METRICS_SERVICE_PORT_HTTP)"
+          value: kube-state-metrics:8080
         envFrom: 
           []
         securityContext: 

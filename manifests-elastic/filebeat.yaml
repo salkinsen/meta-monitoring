@@ -7,7 +7,7 @@ metadata:
   annotations:
   labels:
     app: "filebeat-filebeat"
-    chart: "filebeat-7.13.0"
+    chart: "filebeat-7.11.2"
     heritage: "Helm"
     release: "filebeat"
 ---
@@ -18,37 +18,25 @@ metadata:
   name: filebeat-filebeat-daemonset-config
   labels:
     app: "filebeat-filebeat"
-    chart: "filebeat-7.13.0"
+    chart: "filebeat-7.11.2"
     heritage: "Helm"
     release: "filebeat"
 data:
   filebeat.yml: |
-    # filebeat.inputs:
-    # - type: container
-    #   paths:
-    #     - /var/log/containers/*.log
-    #   processors:
-    #   - add_kubernetes_metadata:
-    #       host: ${NODE_NAME}
-    #       matchers:
-    #       - logs_path:
-    #           logs_path: "/var/log/containers/"
+    filebeat.inputs:
+    - type: container
+      paths:
+        - /var/log/containers/*.log
+      processors:
+      - add_kubernetes_metadata:
+          host: ${NODE_NAME}
+          matchers:
+          - logs_path:
+              logs_path: "/var/log/containers/"
     
     output.elasticsearch:
       host: '${NODE_NAME}'
       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
-
-    filebeat.autodiscover:
-      providers:
-        - type: kubernetes
-          templates:
-            - condition:
-                equals:
-                  kubernetes.namespace: default
-              config:
-                - type: container
-                  paths:
-                    - /var/log/containers/*-${data.kubernetes.container.id}.log
 ---
 # Source: filebeat/templates/clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -57,7 +45,7 @@ metadata:
   name: filebeat-filebeat-cluster-role
   labels:
     app: "filebeat-filebeat"
-    chart: "filebeat-7.13.0"
+    chart: "filebeat-7.11.2"
     heritage: "Helm"
     release: "filebeat"
 rules: 
@@ -79,7 +67,7 @@ metadata:
   name: filebeat-filebeat-cluster-role-binding
   labels:
     app: "filebeat-filebeat"
-    chart: "filebeat-7.13.0"
+    chart: "filebeat-7.11.2"
     heritage: "Helm"
     release: "filebeat"
 roleRef:
@@ -98,7 +86,7 @@ metadata:
   name: filebeat-filebeat
   labels:
     app: "filebeat-filebeat"
-    chart: "filebeat-7.13.0"
+    chart: "filebeat-7.11.2"
     heritage: "Helm"
     release: "filebeat"
 spec:
@@ -112,15 +100,13 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      labels:
-        layer: ms-shop-observed
       annotations:
         
-        configChecksum: 3b5324ec22354c1eca2e56102786ba366652701e5d27a1409409b053a72c90f
+        configChecksum: fc5c3e2b63466b6441d9db2ca50e7df9932fa550b1f69443ad1949ae3a5ec38
       name: "filebeat-filebeat"
       labels:
         app: "filebeat-filebeat"
-        chart: "filebeat-7.13.0"
+        chart: "filebeat-7.11.2"
         heritage: "Helm"
         release: "filebeat"
     spec:
@@ -128,7 +114,7 @@ spec:
         []
       nodeSelector: 
         {}
-      affinity:
+      affinity: 
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
@@ -159,7 +145,7 @@ spec:
           path: /var/run/docker.sock
       containers:
       - name: "filebeat"
-        image: "docker.elastic.co/beats/filebeat:7.13.0"
+        image: "docker.elastic.co/beats/filebeat:7.11.2"
         imagePullPolicy: "IfNotPresent"
         args:
         - "-e"
@@ -224,7 +210,7 @@ spec:
           mountPath: /var/log
           readOnly: true
         # Necessary when using autodiscovery; avoid mounting it otherwise
-        # See: https://www.elastic.co/guide/en/beats/filebeat/7.13/configuration-autodiscover.html
+        # See: https://www.elastic.co/guide/en/beats/filebeat/7.11/configuration-autodiscover.html
         - name: varrundockersock
           mountPath: /var/run/docker.sock
           readOnly: true

@@ -43,7 +43,7 @@ See [supported configurations][] for more details.
 
 ## Installing
 
-This chart is tested with the latest 7.13.0 version.
+This chart is tested with the latest 7.11.2 version.
 
 ### Install released version using Helm repository
 
@@ -58,11 +58,11 @@ This chart is tested with the latest 7.13.0 version.
 
 * Clone the git repo: `git clone git@github.com:elastic/helm-charts.git`
 
-* Checkout the branch : `git checkout 7.13`
+* Checkout the branch : `git checkout 7.11`
 
 * Install it:
-  - with Helm 3: `helm install logstash ./helm-charts/logstash --set imageTag=7.13.0`
-  - with Helm 2 (deprecated): `helm install --name logstash ./helm-charts/logstash --set imageTag=7.13.0`
+  - with Helm 3: `helm install logstash ./helm-charts/logstash --set imageTag=7.11.2`
+  - with Helm 2 (deprecated): `helm install --name logstash ./helm-charts/logstash --set imageTag=7.11.2`
 
 
 ## Upgrading
@@ -119,7 +119,7 @@ useful for the [http input plugin][], for instance.
 | `httpPort`                | The http port that Kubernetes will use for the healthchecks and the service                                                                                                                                                          | `9600`                                |
 | `imagePullPolicy`         | The Kubernetes [imagePullPolicy][] value                                                                                                                                                                                             | `IfNotPresent`                        |
 | `imagePullSecrets`        | Configuration for [imagePullSecrets][] so that you can use a private registry for your image                                                                                                                                         | `[]`                                  |
-| `imageTag`                | The Logstash Docker image tag                                                                                                                                                                                                        | `7.13.0`                     |
+| `imageTag`                | The Logstash Docker image tag                                                                                                                                                                                                        | `7.11.2`                     |
 | `image`                   | The Logstash Docker image                                                                                                                                                                                                            | `docker.elastic.co/logstash/logstash` |
 | `labels`                  | Configurable [labels][] applied to all Logstash pods                                                                                                                                                                                 | `{}`                                  |
 | `ingress`                 | Configurable [ingress][] for external access to Logstash HTTP port.                                                                                                                                                                  | see [values.yaml][]                   |
@@ -128,8 +128,8 @@ useful for the [http input plugin][], for instance.
 | `logstashConfig`          | Allows you to add any config files in `/usr/share/logstash/config/` such as `logstash.yml` and `log4j2.properties` See [values.yaml][] for an example of the formatting                                                              | `{}`                                  |
 | `logstashJavaOpts`        | Java options for Logstash. This is where you should configure the JVM heap size                                                                                                                                                      | `-Xmx1g -Xms1g`                       |
 | `logstashPipeline`        | Allows you to add any pipeline files in `/usr/share/logstash/pipeline/`                                                                                                                                                              | `{}`                                  |
-| `logstashPatternDir`      | Allows you to define a custom directory to store patten files                                                                                                                                                                        | `/usr/share/logstash/patterns/`       |
-| `logstashPattern`         | Allows you to add any pattern files in `logstashPatternDir`                                                                                                                                                                          | `{}`                                  |
+| `logstashPatternDir`      | Allows you to define a custom directory to store patten files | `/usr/share/logstash/patterns/` |
+| `logstashPattern`        | Allows you to add any pattern files in `logstashPatternDir` | `{}` |
 | `maxUnavailable`          | The [maxUnavailable][] value for the pod disruption budget. By default this will prevent Kubernetes from having more than 1 unhealthy pod in the node group                                                                          | `1`                                   |
 | `nameOverride`            | Overrides the chart name for resources. If not set the name will default to `.Chart.Name`                                                                                                                                            | `""`                                  |
 | `nodeAffinity`            | Value for the [node affinity settings][]                                                                                                                                                                                             | `{}`                                  |
@@ -195,7 +195,7 @@ against best practices of containers and immutable infrastructure.
 Please check [CONTRIBUTING.md][] before any contribution or for any questions
 about our development and testing process.
 
-[7.13]: https://github.com/elastic/helm-charts/releases
+[7.11]: https://github.com/elastic/helm-charts/releases
 [BREAKING_CHANGES.md]: https://github.com/elastic/helm-charts/blob/master/BREAKING_CHANGES.md
 [CHANGELOG.md]: https://github.com/elastic/helm-charts/blob/master/CHANGELOG.md
 [CONTRIBUTING.md]: https://github.com/elastic/helm-charts/blob/master/CONTRIBUTING.md
@@ -203,11 +203,11 @@ about our development and testing process.
 [annotations]: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
 [anti-affinity]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
 [deploys statefulsets serially]: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#pod-management-policies
-[custom docker image]: https://www.elastic.co/guide/en/logstash/7.13/docker-config.html#_custom_images
+[custom docker image]: https://www.elastic.co/guide/en/logstash/7.11/docker-config.html#_custom_images
 [environment variables]: https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/#using-environment-variables-inside-of-your-config
 [environment from variables]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#configure-all-key-value-pairs-in-a-configmap-as-container-environment-variables
-[examples]: https://github.com/elastic/helm-charts/tree/7.13/logstash/examples
-[examples/oss]: https://github.com/elastic/helm-charts/tree/7.13/logstash/examples/oss
+[examples]: https://github.com/elastic/helm-charts/tree/7.11/logstash/examples
+[examples/oss]: https://github.com/elastic/helm-charts/tree/7.11/logstash/examples/oss
 [helm]: https://helm.sh
 [hostAliases]: https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
 [http input plugin]: https://www.elastic.co/guide/en/logstash/current/plugins-inputs-http.html
@@ -216,20 +216,20 @@ about our development and testing process.
 [ingress]: https://kubernetes.io/docs/concepts/services-networking/ingress/
 [kubernetes secrets]: https://kubernetes.io/docs/concepts/configuration/secret/
 [labels]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
-[logstash docker image]: https://www.elastic.co/guide/en/logstash/7.13/docker.html
+[logstash docker image]: https://www.elastic.co/guide/en/logstash/7.11/docker.html
 [logstash oss docker image]: https://www.docker.elastic.co/r/logstash/logstash-oss
 [maxUnavailable]: https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
 [node affinity settings]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature
 [nodeSelector]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
-[note]: https://www.elastic.co/guide/en/logstash/7.13/docker-config.html#docker-env-config
+[note]: https://www.elastic.co/guide/en/logstash/7.11/docker-config.html#docker-env-config
 [priorityClass]: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
 [probe]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
 [resources]: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
 [updateStrategy]: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/
 [securityContext]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
 [service]: https://kubernetes.io/docs/concepts/services-networking/service/
-[supported configurations]: https://github.com/elastic/helm-charts/tree/7.13/README.md#supported-configurations
+[supported configurations]: https://github.com/elastic/helm-charts/tree/7.11/README.md#supported-configurations
 [terminationGracePeriod]: https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods
 [tolerations]: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-[values.yaml]: https://github.com/elastic/helm-charts/tree/7.13/logstash/values.yaml
+[values.yaml]: https://github.com/elastic/helm-charts/tree/7.11/logstash/values.yaml
 [volumeClaimTemplate for statefulsets]: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#stable-storage

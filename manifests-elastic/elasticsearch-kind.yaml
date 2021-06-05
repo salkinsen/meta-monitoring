@@ -97,7 +97,6 @@ spec:
         release: "elasticsearch"
         chart: "elasticsearch"
         app: "elasticsearch-master"
-        layer: ms-shop-observed
       annotations:
         
     spec:
@@ -105,14 +104,6 @@ spec:
         fsGroup: 1000
         runAsUser: 1000
       affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: layer
-                operator: NotIn
-                values:
-                - meta-monitoring
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 1
@@ -124,6 +115,14 @@ spec:
                   operator: In
                   values:
                   - "elasticsearch-master"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: layer
+                operator: NotIn
+                values:
+                - meta-monitoring
       terminationGracePeriodSeconds: 120
       volumes:
       enableServiceLinks: true
@@ -132,7 +131,7 @@ spec:
         securityContext:
           runAsUser: 0
           privileged: true
-        image: "docker.elastic.co/elasticsearch/elasticsearch:7.13.0"
+        image: "docker.elastic.co/elasticsearch/elasticsearch:7.11.2"
         imagePullPolicy: "IfNotPresent"
         command: ["sysctl", "-w", "vm.max_map_count=262144"]
         resources:
@@ -146,7 +145,7 @@ spec:
             - ALL
           runAsNonRoot: true
           runAsUser: 1000
-        image: "docker.elastic.co/elasticsearch/elasticsearch:7.13.0"
+        image: "docker.elastic.co/elasticsearch/elasticsearch:7.11.2"
         imagePullPolicy: "IfNotPresent"
         readinessProbe:
           exec:
@@ -208,7 +207,7 @@ spec:
                   fi
                 fi
           failureThreshold: 3
-          initialDelaySeconds: 200
+          initialDelaySeconds: 10
           periodSeconds: 10
           successThreshold: 3
           timeoutSeconds: 5
@@ -220,17 +219,17 @@ spec:
         resources:
           limits:
             cpu: 1000m
-            memory: 512M
+            memory: 2Gi
           requests:
-            cpu: 100m
-            memory: 512M
+            cpu: 1000m
+            memory: 2Gi
         env:
           - name: node.name
             valueFrom:
               fieldRef:
                 fieldPath: metadata.name
           - name: cluster.initial_master_nodes
-            value: "elasticsearch-master-0,elasticsearch-master-1,elasticsearch-master-2,"
+            value: "elasticsearch-master-0,"
           - name: discovery.seed_hosts
             value: "elasticsearch-master-headless"
           - name: cluster.name
@@ -257,28 +256,17 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "elasticsearch-eleel-test"
-  labels:
-    layer: ms-shop-observed
+  name: "elasticsearch-neidv-test"
   annotations:
     "helm.sh/hook": test
     "helm.sh/hook-delete-policy": hook-succeeded
 spec:
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: layer
-            operator: NotIn
-            values:
-            - meta-monitoring
   securityContext:
     fsGroup: 1000
     runAsUser: 1000
   containers:
-  - name: "elasticsearch-lalnz-test"
-    image: "docker.elastic.co/elasticsearch/elasticsearch:7.13.0"
+  - name: "elasticsearch-kbqln-test"
+    image: "docker.elastic.co/elasticsearch/elasticsearch:7.11.2"
     imagePullPolicy: "IfNotPresent"
     command:
       - "sh"

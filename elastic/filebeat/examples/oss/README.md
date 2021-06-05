@@ -1,6 +1,6 @@
 # OSS
 
-This example deploy Filebeat 7.13.0 using [Filebeat OSS][] version.
+This example deploy Filebeat 7.11.2 using [Filebeat OSS][] version.
 
 
 ## Usage
@@ -23,5 +23,5 @@ You can also run [goss integration tests][] using `make test`
 
 
 [filebeat oss]: https://www.elastic.co/downloads/beats/filebeat-oss
-[elasticsearch helm chart]: https://github.com/elastic/helm-charts/tree/7.13/elasticsearch/examples/oss/
-[goss integration tests]: https://github.com/elastic/helm-charts/tree/7.13/filebeat/examples/oss/test/goss.yaml
+[elasticsearch helm chart]: https://github.com/elastic/helm-charts/tree/7.11/elasticsearch/examples/oss/
+[goss integration tests]: https://github.com/elastic/helm-charts/tree/7.11/filebeat/examples/oss/test/goss.yaml
