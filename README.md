@@ -30,3 +30,13 @@ kubectl get nodes --show-labels
 or  
 kubectl describe node "nodename"  
 )
+
+## access Kibana UI
+kubectl port-forward svc/kibana-kibana :5601 
+
+## access Jaeger UI (if deployed)
+kubectl port-forward svc/jaeger-query :80
+
+## access Meta-Monitoring
+kubectl -n meta-monitoring port-forward svc/meta-grafana 3000:3000
+kubectl -n meta-monitoring port-forward svc/meta-prometheus 9091:9091
