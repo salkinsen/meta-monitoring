@@ -380,28 +380,6 @@ spec:
           httpGet:
             path: /
             port: admin
-      - name: jaeger-agent-sidecar
-        securityContext:
-          {}
-        image: jaegertracing/jaeger-agent:1.22.0
-        imagePullPolicy: IfNotPresent
-        args:
-        env:
-        - name: REPORTER_GRPC_HOST_PORT
-          value: jaeger-collector:14250
-        ports:
-        - name: admin
-          containerPort: 14271
-          protocol: TCP
-        volumeMounts:
-        livenessProbe:
-          httpGet:
-            path: /
-            port: admin
-        readinessProbe:
-          httpGet:
-            path: /
-            port: admin
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       volumes:
