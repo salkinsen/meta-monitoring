@@ -70,32 +70,32 @@ data:
     output.elasticsearch:
       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
 ---
-# Source: metricbeat/templates/configmap.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: metricbeat-metricbeat-deployment-config
-  labels:
-    app: "metricbeat-metricbeat"
-    chart: "metricbeat-7.11.2"
-    heritage: "Helm"
-    release: "metricbeat"
-data:
-  metricbeat.yml: |
-    metricbeat.modules:
-    - module: kubernetes
-      enabled: true
-      metricsets:
-        - state_node
-        - state_deployment
-        - state_replicaset
-        - state_pod
-        - state_container
-      period: 10s
-      hosts: ["${KUBE_STATE_METRICS_HOSTS}"]
-    output.elasticsearch:
-      hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
----
+# # Source: metricbeat/templates/configmap.yaml
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: metricbeat-metricbeat-deployment-config
+#   labels:
+#     app: "metricbeat-metricbeat"
+#     chart: "metricbeat-7.11.2"
+#     heritage: "Helm"
+#     release: "metricbeat"
+# data:
+#   metricbeat.yml: |
+#     metricbeat.modules:
+#     - module: kubernetes
+#       enabled: true
+#       metricsets:
+#         - state_node
+#         - state_deployment
+#         - state_replicaset
+#         - state_pod
+#         - state_container
+#       period: 10s
+#       hosts: ["${KUBE_STATE_METRICS_HOSTS}"]
+#     output.elasticsearch:
+#       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
+# ---
 # Source: metricbeat/templates/clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -296,109 +296,109 @@ spec:
         - name: cgroup
           mountPath: /hostfs/sys/fs/cgroup
           readOnly: true
----
-# Source: metricbeat/templates/deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: 'metricbeat-metricbeat-metrics'
-  labels:
-    app: 'metricbeat-metricbeat-metrics'
-    chart: 'metricbeat-7.11.2'
-    heritage: 'Helm'
-    release: 'metricbeat'
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: 'metricbeat-metricbeat-metrics'
-      release: 'metricbeat'
-  template:
-    metadata:
-      annotations:
+# ---
+# # Source: metricbeat/templates/deployment.yaml
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: 'metricbeat-metricbeat-metrics'
+#   labels:
+#     app: 'metricbeat-metricbeat-metrics'
+#     chart: 'metricbeat-7.11.2'
+#     heritage: 'Helm'
+#     release: 'metricbeat'
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: 'metricbeat-metricbeat-metrics'
+#       release: 'metricbeat'
+#   template:
+#     metadata:
+#       annotations:
         
-        configChecksum: 602d9a7454d28c365352a9d4abdad368abd549bc16342ab0eacd4ebe623218f
-      labels:
-        app: 'metricbeat-metricbeat-metrics'
-        chart: 'metricbeat-7.11.2'
-        release: 'metricbeat'
-    spec:
-      affinity: 
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: layer
-                operator: NotIn
-                values:
-                - meta-monitoring
-      nodeSelector: 
-        {}
-      tolerations: 
-        []
-      serviceAccountName: metricbeat-metricbeat
-      terminationGracePeriodSeconds: 30
-      volumes:
-      - name: metricbeat-config
-        configMap:
-          defaultMode: 0600
-          name: metricbeat-metricbeat-deployment-config
-      containers:
-      - name: "metricbeat"
-        image: "docker.elastic.co/beats/metricbeat:7.11.2"
-        imagePullPolicy: "IfNotPresent"
-        args:
-          - "-e"
-          - "-E"
-          - "http.enabled=true"
-        livenessProbe:
-          exec:
-            command:
-            - sh
-            - -c
-            - |
-              #!/usr/bin/env bash -e
-              curl --fail 127.0.0.1:5066
-          failureThreshold: 3
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 5
-        readinessProbe:
-          exec:
-            command:
-            - sh
-            - -c
-            - |
-              #!/usr/bin/env bash -e
-              metricbeat test output
-          failureThreshold: 3
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 5
-        resources: 
-          limits:
-            cpu: 1000m
-            memory: 200Mi
-          requests:
-            cpu: 100m
-            memory: 100Mi
-        env:
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: KUBE_STATE_METRICS_HOSTS
-          value: kube-state-metrics:8080
-        envFrom: 
-          []
-        securityContext: 
-          privileged: false
-          runAsUser: 0
-        volumeMounts:
-        - name: metricbeat-config
-          mountPath: /usr/share/metricbeat/metricbeat.yml
-          readOnly: true
-          subPath: metricbeat.yml
----
+#         configChecksum: 602d9a7454d28c365352a9d4abdad368abd549bc16342ab0eacd4ebe623218f
+#       labels:
+#         app: 'metricbeat-metricbeat-metrics'
+#         chart: 'metricbeat-7.11.2'
+#         release: 'metricbeat'
+#     spec:
+#       affinity: 
+#         nodeAffinity:
+#           requiredDuringSchedulingIgnoredDuringExecution:
+#             nodeSelectorTerms:
+#             - matchExpressions:
+#               - key: layer
+#                 operator: NotIn
+#                 values:
+#                 - meta-monitoring
+#       nodeSelector: 
+#         {}
+#       tolerations: 
+#         []
+#       serviceAccountName: metricbeat-metricbeat
+#       terminationGracePeriodSeconds: 30
+#       volumes:
+#       - name: metricbeat-config
+#         configMap:
+#           defaultMode: 0600
+#           name: metricbeat-metricbeat-deployment-config
+#       containers:
+#       - name: "metricbeat"
+#         image: "docker.elastic.co/beats/metricbeat:7.11.2"
+#         imagePullPolicy: "IfNotPresent"
+#         args:
+#           - "-e"
+#           - "-E"
+#           - "http.enabled=true"
+#         livenessProbe:
+#           exec:
+#             command:
+#             - sh
+#             - -c
+#             - |
+#               #!/usr/bin/env bash -e
+#               curl --fail 127.0.0.1:5066
+#           failureThreshold: 3
+#           initialDelaySeconds: 10
+#           periodSeconds: 10
+#           timeoutSeconds: 5
+#         readinessProbe:
+#           exec:
+#             command:
+#             - sh
+#             - -c
+#             - |
+#               #!/usr/bin/env bash -e
+#               metricbeat test output
+#           failureThreshold: 3
+#           initialDelaySeconds: 10
+#           periodSeconds: 10
+#           timeoutSeconds: 5
+#         resources: 
+#           limits:
+#             cpu: 1000m
+#             memory: 200Mi
+#           requests:
+#             cpu: 100m
+#             memory: 100Mi
+#         env:
+#         - name: POD_NAMESPACE
+#           valueFrom:
+#             fieldRef:
+#               fieldPath: metadata.namespace
+#         - name: KUBE_STATE_METRICS_HOSTS
+#           value: kube-state-metrics:8080
+#         envFrom: 
+#           []
+#         securityContext: 
+#           privileged: false
+#           runAsUser: 0
+#         volumeMounts:
+#         - name: metricbeat-config
+#           mountPath: /usr/share/metricbeat/metricbeat.yml
+#           readOnly: true
+#           subPath: metricbeat.yml
+# ---
 # Source: metricbeat/templates/deployment.yaml
 # Deploy singleton instance in the whole cluster for some unique data sources, like kube-state-metrics
