@@ -43,3 +43,6 @@ kubectl -n meta-monitoring port-forward svc/meta-prometheus 9091:9091
 
 ## access FrontEnd
 kubectl port-forward deployment/frontend 8080:8080
+
+## show pods and on which nodes they are
+kubectl get pods --all-namespaces -o wide
