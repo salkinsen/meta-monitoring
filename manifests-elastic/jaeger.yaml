@@ -80,6 +80,8 @@ spec:
     app.kubernetes.io/name: jaeger
     app.kubernetes.io/instance: jaeger
     app.kubernetes.io/component: agent
+  topologyKeys:
+  - "kubernetes.io/hostname"
 ---
 # Source: jaeger/templates/collector-svc.yaml
 apiVersion: v1
@@ -346,7 +348,7 @@ spec:
           {}
         image: jaegertracing/jaeger-query:1.22.0
         imagePullPolicy: IfNotPresent
-        args:
+        args: ["--query.max-clock-skew-adjustment", "2s"]
           
         env:
           - name: SPAN_STORAGE_TYPE
