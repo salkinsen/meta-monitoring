@@ -3,9 +3,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kibana-kibana
+  name: kibana-metrics
   labels: 
-    app: kibana
+    app: kibana-metrics
     release: "kibana"
     heritage: Helm
 spec:
@@ -16,16 +16,16 @@ spec:
       name: http
       targetPort: 5601
   selector:
-    app: kibana
+    app: kibana-metrics
     release: "kibana"
 ---
 # Source: kibana/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kibana-kibana
+  name: kibana-metrics
   labels: 
-    app: kibana
+    app: kibana-metrics
     release: "kibana"
     heritage: Helm
 spec:
@@ -34,12 +34,12 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: kibana
+      app: kibana-metrics
       release: "kibana"
   template:
     metadata:
       labels:
-        app: kibana
+        app: kibana-metrics
         release: "kibana"
       annotations:
         
@@ -57,7 +57,7 @@ spec:
                 values:
                 - meta-monitoring
       containers:
-      - name: kibana
+      - name: kibana-metrics
         securityContext:
           capabilities:
             drop:
@@ -68,11 +68,7 @@ spec:
         imagePullPolicy: "IfNotPresent"
         env:
           - name: ELASTICSEARCH_HOSTS
-            value: "http://elasticsearch-master:9200"
-          - name: SERVER_HOST
-            value: "0.0.0.0"
-          - name: NODE_OPTIONS
-            value: --max-old-space-size=1800
+            value: "http://elasticsearch-monitoring-master:9200"
         readinessProbe:
           failureThreshold: 3
           initialDelaySeconds: 10
@@ -107,7 +103,7 @@ spec:
                     exit 1
                 }
 
-                http "/app/kibana"
+                http "/app/kibana-metrics"
         ports:
         - containerPort: 5601
         resources:

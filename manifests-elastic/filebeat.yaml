@@ -36,7 +36,7 @@ data:
     
     output.elasticsearch:
       host: '${NODE_NAME}'
-      hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
+      hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-logging-master:9200}'
 ---
 # Source: filebeat/templates/clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1

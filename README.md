@@ -31,8 +31,11 @@ or
 kubectl describe node "nodename"  
 )
 
-## access Kibana UI
-kubectl port-forward svc/kibana-kibana :5601 
+## access Kibana UI for Logging
+kubectl port-forward svc/kibana-logging :5601 
+
+## access Kibana UI for Monitoring
+kubectl port-forward svc/kibana-metrics :5601 
 
 ## access Jaeger UI (if deployed)
 kubectl port-forward svc/jaeger-query :80

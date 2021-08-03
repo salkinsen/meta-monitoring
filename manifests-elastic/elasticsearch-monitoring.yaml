@@ -3,23 +3,23 @@
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
-  name: "elasticsearch-master-pdb"
+  name: "elasticsearch-monitoring-master-pdb"
 spec:
   maxUnavailable: 1
   selector:
     matchLabels:
-      app: "elasticsearch-master"
+      app: "elasticsearch-monitoring-master"
 ---
 # Source: elasticsearch/templates/service.yaml
 kind: Service
 apiVersion: v1
 metadata:
-  name: elasticsearch-master
+  name: elasticsearch-monitoring-master
   labels:
     heritage: "Helm"
     release: "elasticsearch"
     chart: "elasticsearch"
-    app: "elasticsearch-master"
+    app: "elasticsearch-monitoring-master"
   annotations:
     {}
 spec:
@@ -27,7 +27,7 @@ spec:
   selector:
     release: "elasticsearch"
     chart: "elasticsearch"
-    app: "elasticsearch-master"
+    app: "elasticsearch-monitoring-master"
   ports:
   - name: http
     protocol: TCP
@@ -40,12 +40,12 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: elasticsearch-master-headless
+  name: elasticsearch-monitoring-master-headless
   labels:
     heritage: "Helm"
     release: "elasticsearch"
     chart: "elasticsearch"
-    app: "elasticsearch-master"
+    app: "elasticsearch-monitoring-master"
   annotations:
     service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
 spec:
@@ -53,7 +53,7 @@ spec:
   # Create endpoints also if the related pod isn't ready
   publishNotReadyAddresses: true
   selector:
-    app: "elasticsearch-master"
+    app: "elasticsearch-monitoring-master"
   ports:
   - name: http
     port: 9200
@@ -64,26 +64,26 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: elasticsearch-master
+  name: elasticsearch-monitoring-master
   labels:
     heritage: "Helm"
     release: "elasticsearch"
     chart: "elasticsearch"
-    app: "elasticsearch-master"
+    app: "elasticsearch-monitoring-master"
   annotations:
     esMajorVersion: "7"
 spec:
-  serviceName: elasticsearch-master-headless
+  serviceName: elasticsearch-monitoring-master-headless
   selector:
     matchLabels:
-      app: "elasticsearch-master"
+      app: "elasticsearch-monitoring-master"
   replicas: 1
   podManagementPolicy: Parallel
   updateStrategy:
     type: RollingUpdate
   volumeClaimTemplates:
   - metadata:
-      name: elasticsearch-master
+      name: elasticsearch-monitoring-master
     spec:
       accessModes:
       - ReadWriteOnce
@@ -92,11 +92,11 @@ spec:
           storage: 100M
   template:
     metadata:
-      name: "elasticsearch-master"
+      name: "elasticsearch-monitoring-master"
       labels:
         release: "elasticsearch"
         chart: "elasticsearch"
-        app: "elasticsearch-master"
+        app: "elasticsearch-monitoring-master"
       annotations:
         
     spec:
@@ -114,7 +114,7 @@ spec:
                 - key: app
                   operator: In
                   values:
-                  - "elasticsearch-master"
+                  - "elasticsearch-monitoring-master"
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
@@ -229,9 +229,9 @@ spec:
               fieldRef:
                 fieldPath: metadata.name
           - name: cluster.initial_master_nodes
-            value: "elasticsearch-master-0,"
+            value: "elasticsearch-monitoring-master-0,"
           - name: discovery.seed_hosts
-            value: "elasticsearch-master-headless"
+            value: "elasticsearch-monitoring-master-headless"
           - name: cluster.name
             value: "elasticsearch"
           - name: network.host
@@ -249,7 +249,7 @@ spec:
           - name: node.remote_cluster_client
             value: "true"
         volumeMounts:
-          - name: "elasticsearch-master"
+          - name: "elasticsearch-monitoring-master"
             mountPath: /usr/share/elasticsearch/data
 ---
 # Source: elasticsearch/templates/test/test-elasticsearch-health.yaml
@@ -282,5 +282,5 @@ spec:
 #       - "-c"
 #       - |
 #         #!/usr/bin/env bash -e
-#         curl -XGET --fail 'elasticsearch-master:9200/_cluster/health?wait_for_status=green&timeout=1s'
+#         curl -XGET --fail 'elasticsearch-monitoring-master:9200/_cluster/health?wait_for_status=green&timeout=1s'
 #   restartPolicy: Never

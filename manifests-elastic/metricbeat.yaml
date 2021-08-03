@@ -24,7 +24,7 @@ metadata:
 data:
   metricbeat.yml: |
     # setup.dashboards.enabled: true
-    # setup.kibana.host: "http://kibana-kibana:5601"
+    # setup.kibana.host: "http://kibana-metrics:5601"
     metricbeat.modules:
     - module: kubernetes
       metricsets:
@@ -69,7 +69,7 @@ data:
       - drop_event.when.regexp:
           system.filesystem.mount_point: '^/(sys|cgroup|proc|dev|etc|host|lib)($|/)'
     output.elasticsearch:
-      hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
+      hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-monitoring-master:9200}'
 ---
 # # Source: metricbeat/templates/configmap.yaml
 # apiVersion: v1
@@ -95,7 +95,7 @@ data:
 #       period: 10s
 #       hosts: ["${KUBE_STATE_METRICS_HOSTS}"]
 #     output.elasticsearch:
-#       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
+#       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-monitoring-master:9200}'
 # ---
 # Source: metricbeat/templates/clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
