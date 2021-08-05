@@ -4,7 +4,6 @@
 # * https://raw.githubusercontent.com/prometheus/prometheus/master/documentation/examples/prometheus-kubernetes.yml
 # * https://phoenixnap.com/kb/prometheus-kubernetes-monitoring
 
-# * TODO: check if there are collisions with the "normal" monitoring
 
 apiVersion: v1
 kind: ConfigMap
