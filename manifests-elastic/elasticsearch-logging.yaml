@@ -89,7 +89,7 @@ spec:
       - ReadWriteOnce
       resources:
         requests:
-          storage: 100M
+          storage: 1Gi
   template:
     metadata:
       name: "elasticsearch-logging-master"
