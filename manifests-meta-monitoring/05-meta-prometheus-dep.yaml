@@ -1,6 +1,3 @@
-# TODO: make sure ports dont clash with normal monitoring
-
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
