@@ -37,7 +37,7 @@ data:
           }
         ]
       }
-  main_rev5_adapted.json: |-
+  cAdvisor-updated.json: |-
     {
       "annotations": {
         "list": [
@@ -52,12 +52,12 @@ data:
           }
         ]
       },
-      "description": "A simple overview of the most important Docker host and container metrics. (cAdvisor/Prometheus)",
+      "description": "cAdvisor/Prometheus-metrics",
       "editable": true,
       "gnetId": 893,
       "graphTooltip": 1,
       "id": 1,
-      "iteration": 1621003130725,
+      "iteration": 1628192464140,
       "links": [],
       "panels": [
         {
@@ -1515,116 +1515,9 @@ data:
           "editable": true,
           "error": false,
           "fieldConfig": {
-            "defaults": {},
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "grid": {},
-          "gridPos": {
-            "h": 6,
-            "w": 24,
-            "x": 0,
-            "y": 10
-          },
-          "hiddenSeries": false,
-          "id": 8,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "null as zero",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.2",
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(rate(container_network_receive_bytes_total{name=~\".+\"}[$interval])) by (name)",
-              "intervalFactor": 2,
-              "legendFormat": "{{name}}",
-              "refId": "A",
-              "step": 240
+            "defaults": {
+              "unit": "percent"
             },
-            {
-              "expr": "- rate(container_network_transmit_bytes_total{name=~\".+\"}[$interval])",
-              "hide": true,
-              "intervalFactor": 2,
-              "legendFormat": "{{name}}",
-              "refId": "B",
-              "step": 10
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Received Network Traffic per Container",
-          "tooltip": {
-            "msResolution": true,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "Bps",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "meta-prometheus",
-          "editable": true,
-          "error": false,
-          "fieldConfig": {
-            "defaults": {},
             "overrides": []
           },
           "fill": 5,
@@ -1634,7 +1527,7 @@ data:
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 16
+            "y": 10
           },
           "hiddenSeries": false,
           "id": 1,
@@ -1667,11 +1560,14 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\".+\"}[$interval])) by (name) * 100",
+              "exemplar": true,
+              "expr": "rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", container!=\"\", id=~\"/kubelet/.*\"}[5m]) * 100",
+              "format": "time_series",
               "hide": false,
+              "instant": false,
               "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "{{name}}",
+              "intervalFactor": 1,
+              "legendFormat": "{{pod}}",
               "metric": "",
               "refId": "F",
               "step": 240
@@ -1698,6 +1594,7 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:1251",
               "format": "percent",
               "label": "",
               "logBase": 1,
@@ -1705,6 +1602,7 @@ data:
               "show": true
             },
             {
+              "$$hashKey": "object:1252",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -1737,7 +1635,7 @@ data:
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 22
+            "y": 16
           },
           "hiddenSeries": false,
           "id": 10,
@@ -1770,10 +1668,12 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(container_memory_rss{name=~\".+\"}) by (name)",
+              "exemplar": true,
+              "expr": "container_memory_working_set_bytes{namespace=\"default\", container!=\"\", id=~\"/kubelet/.*\"}",
               "hide": false,
+              "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{{name}}",
+              "legendFormat": "{{pod}}",
               "refId": "A",
               "step": 240
             },
@@ -1807,6 +1707,7 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:1113",
               "format": "bytes",
               "label": "",
               "logBase": 1,
@@ -1815,6 +1716,7 @@ data:
               "show": true
             },
             {
+              "$$hashKey": "object:1114",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -1846,8 +1748,8 @@ data:
           "gridPos": {
             "h": 8,
             "w": 23,
-            "x": 1,
-            "y": 28
+            "x": 0,
+            "y": 22
           },
           "hiddenSeries": false,
           "id": 9,
@@ -1882,9 +1784,11 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(container_network_transmit_bytes_total{name=~\".+\"}[$interval])) by (name)",
+              "exemplar": true,
+              "expr": "rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", id=~\"/kubelet/.*\"}[5m])",
+              "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{{name}}",
+              "legendFormat": "{{pod}}",
               "refId": "A",
               "step": 240
             },
@@ -1932,6 +1836,120 @@ data:
               "max": 8,
               "min": 0,
               "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "meta-prometheus",
+          "editable": true,
+          "error": false,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "Bps"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "grid": {},
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 30
+          },
+          "hiddenSeries": false,
+          "id": 8,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.2",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\",id=~\"/kubelet/.*\"}[5m])",
+              "instant": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "{{pod}}",
+              "refId": "A",
+              "step": 240
+            },
+            {
+              "expr": "- rate(container_network_transmit_bytes_total{name=~\".+\"}[$interval])",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "{{name}}",
+              "refId": "B",
+              "step": 10
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Received Network Traffic per Container",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "Bps",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
             }
           ],
           "yaxis": {
@@ -2426,6 +2444,7 @@ data:
               }
             ],
             "query": "30s,1m,2m,3m,5m,7m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
+            "queryValue": "",
             "refresh": 2,
             "skipUrlSync": false,
             "type": "interval"
@@ -2494,7 +2513,7 @@ data:
         ]
       },
       "timezone": "browser",
-      "title": "!Docker and system monitoring",
+      "title": "cAdvisor / Prometheus",
       "uid": "3t6ItUCMk",
-      "version": 2
+      "version": 3
     }

@@ -12,7 +12,7 @@
         }
       ]
     },
-    "description": "A simple overview of the most important Docker host and container metrics. (cAdvisor/Prometheus)",
+    "description": "cAdvisor/Prometheus-metrics",
     "editable": true,
     "gnetId": 893,
     "graphTooltip": 1,
