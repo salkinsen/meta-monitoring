@@ -138,7 +138,7 @@ spec:
           {}
 
       containers:
-      - name: "elasticsearch"
+      - name: "elasticsearch-monitoring"
         securityContext:
           capabilities:
             drop:
