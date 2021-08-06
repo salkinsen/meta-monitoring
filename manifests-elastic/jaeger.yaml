@@ -178,7 +178,8 @@ spec:
                 - meta-monitoring
       securityContext:
         {}
-      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       serviceAccountName: jaeger-agent
       containers:
       - name: jaeger-agent
