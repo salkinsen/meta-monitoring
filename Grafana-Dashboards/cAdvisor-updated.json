@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 893,
   "graphTooltip": 1,
-  "id": 1,
-  "iteration": 1628192464140,
+  "id": 6,
+  "iteration": 1628275749968,
   "links": [],
   "panels": [
     {
@@ -1490,6 +1490,521 @@
         "y": 10
       },
       "hiddenSeries": false,
+      "id": 38,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null as zero",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.2",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[15m]) * 100",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{container}}",
+          "metric": "",
+          "refId": "F",
+          "step": 240
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container=~\"ms-.*\", container!=\"\", id=~\"/kubelet/.*\"}[15m])) * 100",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Sum MS",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[15m])) * 100",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Sum",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TotalAvg - CPU Usage per Container",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:1251",
+          "format": "percent",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1252",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "meta-prometheus",
+      "editable": true,
+      "error": false,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "fill": 3,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "id": 39,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null as zero",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.2",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avg_over_time(container_memory_working_set_bytes{namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[15m])",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{container}}",
+          "refId": "A",
+          "step": 240
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(avg_over_time(container_memory_working_set_bytes{namespace=\"default\", container=~\"ms-.*\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[15m]))",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Sum MS",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(avg_over_time(container_memory_working_set_bytes{namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[15m]))",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Sum",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TotalAvg - Memory Usage per Container",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:1113",
+          "format": "bytes",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1114",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "meta-prometheus",
+      "description": "",
+      "editable": true,
+      "error": false,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 8,
+        "w": 23,
+        "x": 0,
+        "y": 22
+      },
+      "hiddenSeries": false,
+      "id": 40,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null as zero",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.2",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[15m])",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{pod}}",
+          "refId": "A",
+          "step": 240
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", pod=~\"adservice.*|cartservice.*|checkoutservice.*|currencyservice.*|emailservice.*|frontend.*|paymentservice.*|productcatalogservice.*|recommendationservice.*|shippingservice.*\", id=~\"/kubelet/.*\"}[15m]))",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Sum MS",
+          "refId": "B",
+          "step": 10
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[15m]))",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Sum",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TotalAvg - Sent Network Traffic per Container",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:535",
+          "format": "Bps",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:536",
+          "format": "short",
+          "label": "",
+          "logBase": 10,
+          "max": 8,
+          "min": 0,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "meta-prometheus",
+      "description": "",
+      "editable": true,
+      "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "hiddenSeries": false,
+      "id": 41,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null as zero",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.2",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[15m])",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{pod}}",
+          "refId": "A",
+          "step": 240
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", pod=~\"adservice.*|cartservice.*|checkoutservice.*|currencyservice.*|emailservice.*|frontend.*|paymentservice.*|productcatalogservice.*|recommendationservice.*|shippingservice.*\", id=~\"/kubelet/.*\"}[15m]))",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Sum MS",
+          "refId": "B",
+          "step": 10
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[15m]))",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Sum",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TotalAvg - Received Network Traffic per Container",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:631",
+          "format": "Bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:632",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "meta-prometheus",
+      "editable": true,
+      "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "fill": 5,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "hiddenSeries": false,
       "id": 1,
       "legend": {
         "alignAsTable": true,
@@ -1521,16 +2036,32 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", container!=\"\", id=~\"/kubelet/.*\"}[5m]) * 100",
+          "expr": "rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[5m]) * 100",
           "format": "time_series",
           "hide": false,
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{pod}}",
+          "legendFormat": "{{container}}",
           "metric": "",
           "refId": "F",
           "step": 240
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container=~\"ms-.*\", container!=\"\", id=~\"/kubelet/.*\"}[5m])) * 100",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "Sum MS",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[5m])) * 100",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "Sum",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -1595,7 +2126,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 42
       },
       "hiddenSeries": false,
       "id": 10,
@@ -1629,21 +2160,30 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "container_memory_working_set_bytes{namespace=\"default\", container!=\"\", id=~\"/kubelet/.*\"}",
+          "expr": "container_memory_working_set_bytes{namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}",
           "hide": false,
           "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "{{pod}}",
+          "intervalFactor": 1,
+          "legendFormat": "{{container}}",
           "refId": "A",
           "step": 240
         },
         {
-          "expr": "container_memory_usage_bytes{name=~\".+\"}",
+          "exemplar": true,
+          "expr": "sum(container_memory_working_set_bytes{namespace=\"default\", container=~\"ms-.*\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"})",
           "hide": true,
-          "intervalFactor": 2,
-          "legendFormat": "{{name}}",
-          "refId": "B",
-          "step": 240
+          "interval": "",
+          "legendFormat": "Sum MS",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(container_memory_working_set_bytes{namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"})",
+          "hide": true,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Sum",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -1709,7 +2249,7 @@
         "h": 8,
         "w": 23,
         "x": 0,
-        "y": 22
+        "y": 48
       },
       "hiddenSeries": false,
       "id": 9,
@@ -1745,20 +2285,31 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", id=~\"/kubelet/.*\"}[5m])",
+          "expr": "rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[5m])",
+          "hide": false,
           "interval": "",
-          "intervalFactor": 2,
+          "intervalFactor": 1,
           "legendFormat": "{{pod}}",
           "refId": "A",
           "step": 240
         },
         {
-          "expr": "rate(container_network_transmit_bytes_total{id=\"/\"}[$interval])",
+          "exemplar": true,
+          "expr": "sum(rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", pod=~\"adservice.*|cartservice.*|checkoutservice.*|currencyservice.*|emailservice.*|frontend.*|paymentservice.*|productcatalogservice.*|recommendationservice.*|shippingservice.*\", id=~\"/kubelet/.*\"}[5m]))",
           "hide": true,
-          "intervalFactor": 2,
-          "legendFormat": "",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Sum MS",
           "refId": "B",
           "step": 10
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[5m]))",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "Sum",
+          "refId": "C"
         }
       ],
       "thresholds": [],
@@ -1782,6 +2333,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:535",
           "format": "Bps",
           "label": "",
           "logBase": 1,
@@ -1790,6 +2342,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:536",
           "format": "short",
           "label": "",
           "logBase": 10,
@@ -1824,7 +2377,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 56
       },
       "hiddenSeries": false,
       "id": 8,
@@ -1858,21 +2411,32 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\",id=~\"/kubelet/.*\"}[5m])",
+          "expr": "rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[5m])",
+          "hide": false,
           "instant": false,
           "interval": "",
-          "intervalFactor": 2,
+          "intervalFactor": 1,
           "legendFormat": "{{pod}}",
           "refId": "A",
           "step": 240
         },
         {
-          "expr": "- rate(container_network_transmit_bytes_total{name=~\".+\"}[$interval])",
+          "exemplar": true,
+          "expr": "sum(rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", pod=~\"adservice.*|cartservice.*|checkoutservice.*|currencyservice.*|emailservice.*|frontend.*|paymentservice.*|productcatalogservice.*|recommendationservice.*|shippingservice.*\", id=~\"/kubelet/.*\"}[5m]))",
           "hide": true,
-          "intervalFactor": 2,
-          "legendFormat": "{{name}}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Sum MS",
           "refId": "B",
           "step": 10
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[5m]))",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "Sum",
+          "refId": "C"
         }
       ],
       "thresholds": [],
@@ -1896,6 +2460,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:631",
           "format": "Bps",
           "label": null,
           "logBase": 1,
@@ -1904,6 +2469,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:632",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1936,7 +2502,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 62
       },
       "hiddenSeries": false,
       "id": 34,
@@ -2046,7 +2612,7 @@
         "h": 10,
         "w": 8,
         "x": 0,
-        "y": 42
+        "y": 68
       },
       "id": 37,
       "links": [],
@@ -2126,7 +2692,7 @@
         "h": 10,
         "w": 8,
         "x": 8,
-        "y": 42
+        "y": 68
       },
       "id": 35,
       "links": [],
@@ -2205,7 +2771,7 @@
         "h": 10,
         "w": 8,
         "x": 16,
-        "y": 42
+        "y": 68
       },
       "id": 36,
       "links": [],
@@ -2412,10 +2978,13 @@
       {
         "allValue": null,
         "current": {
-          "isNone": true,
-          "selected": false,
-          "text": "None",
-          "value": ""
+          "selected": true,
+          "text": [
+            "None"
+          ],
+          "value": [
+            ""
+          ]
         },
         "datasource": "meta-prometheus",
         "definition": "",
@@ -2444,7 +3013,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -2473,7 +3042,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "cAdvisor / Prometheus",
-  "uid": "3t6ItUCMk",
-  "version": 3
+  "title": "cAdvisor from Prometheus",
+  "uid": "3t6ItUCMka",
+  "version": 2
 }
