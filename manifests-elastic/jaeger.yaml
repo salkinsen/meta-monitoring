@@ -55,10 +55,10 @@ metadata:
     app.kubernetes.io/component: agent
 spec:
   ports:
-  - name: zipkin-compact
-    port: 5775
-    protocol: UDP
-    targetPort: zipkin-compact
+  # - name: zipkin-compact
+  #   port: 5775
+  #   protocol: UDP
+  #   targetPort: zipkin-compact
   - name: jaeger-compact
     port: 6831
     protocol: UDP
@@ -67,14 +67,14 @@ spec:
     port: 6832
     protocol: UDP
     targetPort: jaeger-binary
-  - name: http
-    port: 5778
-    protocol: TCP
-    targetPort: http
-  - name: admin
-    port: 14271
-    protocol: TCP
-    targetPort: admin
+  # - name: http
+  #   port: 5778
+  #   protocol: TCP
+  #   targetPort: http
+  # - name: admin
+  #   port: 14271
+  #   protocol: TCP
+  #   targetPort: admin
   type: ClusterIP
   selector:
     app.kubernetes.io/name: jaeger
@@ -178,8 +178,7 @@ spec:
                 - meta-monitoring
       securityContext:
         {}
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
+      dnsPolicy: ClusterFirst
       serviceAccountName: jaeger-agent
       containers:
       - name: jaeger-agent
@@ -192,18 +191,20 @@ spec:
           - name: REPORTER_GRPC_HOST_PORT
             value: jaeger-collector:14250
         ports:
-        - name: zipkin-compact
-          containerPort: 5775
-          protocol: UDP
+        # - name: zipkin-compact
+        #   containerPort: 5775
+        #   protocol: UDP
         - name: jaeger-compact
           containerPort: 6831
+          hostPort: 6831
           protocol: UDP
         - name: jaeger-binary
           containerPort: 6832
+          hostPort: 6832
           protocol: UDP
-        - name: http
-          containerPort: 5778
-          protocol: TCP
+        # - name: http
+        #   containerPort: 5778
+        #   protocol: TCP
         - name: admin
           containerPort: 14271
           protocol: TCP
