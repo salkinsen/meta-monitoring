@@ -203,6 +203,7 @@ spec:
                 operator: NotIn
                 values:
                 - meta-monitoring
+                - observability
       nodeSelector: 
         {}
       tolerations: 

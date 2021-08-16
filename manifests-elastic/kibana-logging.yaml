@@ -56,6 +56,11 @@ spec:
                 operator: NotIn
                 values:
                 - meta-monitoring
+            - matchExpressions:
+              - key: layer
+                operator: In
+                values:
+                - observability
       containers:
       - name: kibana-logging
         securityContext:

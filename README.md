@@ -49,3 +49,6 @@ kubectl port-forward deployment/frontend 8080:8080
 
 ## show pods and on which nodes they are
 kubectl get pods --all-namespaces -o wide
+
+## check if default namespace is clear
+kubectl get pods; kubectl get pvc; kubectl get pv

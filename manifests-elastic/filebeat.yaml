@@ -123,6 +123,7 @@ spec:
                 operator: NotIn
                 values:
                 - meta-monitoring
+                - observability
       serviceAccountName: filebeat-filebeat
       terminationGracePeriodSeconds: 30
       volumes:
