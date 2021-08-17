@@ -89,7 +89,7 @@ spec:
       - ReadWriteOnce
       resources:
         requests:
-          storage: 100Gi
+          storage: 30Gi
   template:
     metadata:
       name: "elasticsearch-tracing-master"
