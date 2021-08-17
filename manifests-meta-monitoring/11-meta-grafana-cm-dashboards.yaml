@@ -63,7 +63,7 @@ data:
       "gnetId": 893,
       "graphTooltip": 1,
       "id": 1,
-      "iteration": 1628339900480,
+      "iteration": 1629144313129,
       "links": [],
       "panels": [
         {
@@ -1480,7 +1480,7 @@ data:
           "targets": [
             {
               "exemplar": true,
-              "expr": "rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[15m]) * 100",
+              "expr": "rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubepods/.*\"}[15m]) * 100",
               "format": "time_series",
               "hide": false,
               "instant": true,
@@ -1493,7 +1493,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container=~\"ms-.*\", container!=\"\", id=~\"/kubelet/.*\"}[15m])) * 100",
+              "expr": "sum(rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container=~\"ms-.*\", container!=\"\", id=~\"/kubepods/.*\"}[15m])) * 100",
               "format": "time_series",
               "hide": false,
               "instant": true,
@@ -1503,7 +1503,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[15m])) * 100",
+              "expr": "sum(rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubepods/.*\"}[15m])) * 100",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -1603,7 +1603,7 @@ data:
           "targets": [
             {
               "exemplar": true,
-              "expr": "avg_over_time(container_memory_working_set_bytes{namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[15m])",
+              "expr": "avg_over_time(container_memory_working_set_bytes{namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubepods/.*\"}[15m])",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -1614,7 +1614,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(avg_over_time(container_memory_working_set_bytes{namespace=\"default\", container=~\"ms-.*\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[15m]))",
+              "expr": "sum(avg_over_time(container_memory_working_set_bytes{namespace=\"default\", container=~\"ms-.*\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubepods/.*\"}[15m]))",
               "format": "time_series",
               "hide": false,
               "instant": true,
@@ -1624,7 +1624,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(avg_over_time(container_memory_working_set_bytes{namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[15m]))",
+              "expr": "sum(avg_over_time(container_memory_working_set_bytes{namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubepods/.*\"}[15m]))",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -1728,7 +1728,7 @@ data:
           "targets": [
             {
               "exemplar": true,
-              "expr": "rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[15m])",
+              "expr": "rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubepods/.*\"}[15m])",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -1739,7 +1739,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", pod=~\"adservice.*|cartservice.*|checkoutservice.*|currencyservice.*|emailservice.*|frontend.*|paymentservice.*|productcatalogservice.*|recommendationservice.*|shippingservice.*|redis.*\", id=~\"/kubelet/.*\"}[15m]))",
+              "expr": "sum(rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", pod=~\"adservice.*|cartservice.*|checkoutservice.*|currencyservice.*|emailservice.*|frontend.*|paymentservice.*|productcatalogservice.*|recommendationservice.*|shippingservice.*|redis.*\", id=~\"/kubepods/.*\"}[15m]))",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -1750,7 +1750,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[15m]))",
+              "expr": "sum(rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubepods/.*\"}[15m]))",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -1858,7 +1858,7 @@ data:
           "targets": [
             {
               "exemplar": true,
-              "expr": "rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[15m])",
+              "expr": "rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubepods/.*\"}[15m])",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -1869,7 +1869,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", pod=~\"adservice.*|cartservice.*|checkoutservice.*|currencyservice.*|emailservice.*|frontend.*|paymentservice.*|productcatalogservice.*|recommendationservice.*|shippingservice.*|redis.*\", id=~\"/kubelet/.*\"}[15m]))",
+              "expr": "sum(rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", pod=~\"adservice.*|cartservice.*|checkoutservice.*|currencyservice.*|emailservice.*|frontend.*|paymentservice.*|productcatalogservice.*|recommendationservice.*|shippingservice.*|redis.*\", id=~\"/kubepods/.*\"}[15m]))",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -1880,7 +1880,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[15m]))",
+              "expr": "sum(rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubepods/.*\"}[15m]))",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -1987,7 +1987,7 @@ data:
           "targets": [
             {
               "exemplar": true,
-              "expr": "rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[5m]) * 100",
+              "expr": "rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\"}[5m]) * 100",
               "format": "time_series",
               "hide": false,
               "instant": false,
@@ -2000,7 +2000,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container=~\"ms-.*\", container!=\"\", id=~\"/kubelet/.*\"}[5m])) * 100",
+              "expr": "sum(rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container=~\"ms-.*\", container!=\"\", id=~\"/kubepods/.*\"}[5m])) * 100",
               "hide": true,
               "interval": "",
               "legendFormat": "Sum MS",
@@ -2008,7 +2008,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}[5m])) * 100",
+              "expr": "sum(rate(container_cpu_usage_seconds_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubepods/.*\"}[5m])) * 100",
               "hide": true,
               "interval": "",
               "legendFormat": "Sum",
@@ -2107,7 +2107,7 @@ data:
           "targets": [
             {
               "exemplar": true,
-              "expr": "container_memory_working_set_bytes{namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"}",
+              "expr": "container_memory_working_set_bytes{namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\"}",
               "hide": false,
               "interval": "",
               "intervalFactor": 1,
@@ -2117,7 +2117,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(container_memory_working_set_bytes{namespace=\"default\", container=~\"ms-.*\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"})",
+              "expr": "sum(container_memory_working_set_bytes{namespace=\"default\", container=~\"ms-.*\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubepods/.*\"})",
               "hide": true,
               "interval": "",
               "legendFormat": "Sum MS",
@@ -2125,7 +2125,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(container_memory_working_set_bytes{namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubelet/.*\"})",
+              "expr": "sum(container_memory_working_set_bytes{namespace=\"default\", pod!~\"loadgenerator-.*\", container!=\"\", id=~\"/kubepods/.*\"})",
               "hide": true,
               "instant": false,
               "interval": "",
@@ -2228,7 +2228,7 @@ data:
           "targets": [
             {
               "exemplar": true,
-              "expr": "rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[5m])",
+              "expr": "rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\"}[5m])",
               "hide": false,
               "interval": "",
               "intervalFactor": 1,
@@ -2238,7 +2238,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", pod=~\"adservice.*|cartservice.*|checkoutservice.*|currencyservice.*|emailservice.*|frontend.*|paymentservice.*|productcatalogservice.*|recommendationservice.*|shippingservice.*|redis.*\", id=~\"/kubelet/.*\"}[5m]))",
+              "expr": "sum(rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", pod=~\"adservice.*|cartservice.*|checkoutservice.*|currencyservice.*|emailservice.*|frontend.*|paymentservice.*|productcatalogservice.*|recommendationservice.*|shippingservice.*|redis.*\", id=~\"/kubepods/.*\"}[5m]))",
               "hide": true,
               "interval": "",
               "intervalFactor": 1,
@@ -2248,7 +2248,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[5m]))",
+              "expr": "sum(rate(container_network_transmit_bytes_total{name=~\".+\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubepods/.*\"}[5m]))",
               "hide": true,
               "interval": "",
               "legendFormat": "Sum",
@@ -2354,7 +2354,7 @@ data:
           "targets": [
             {
               "exemplar": true,
-              "expr": "rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[5m])",
+              "expr": "rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubepods/.*\"}[5m])",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -2365,7 +2365,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", pod=~\"adservice.*|cartservice.*|checkoutservice.*|currencyservice.*|emailservice.*|frontend.*|paymentservice.*|productcatalogservice.*|recommendationservice.*|shippingservice.*|redis.*\", id=~\"/kubelet/.*\"}[5m]))",
+              "expr": "sum(rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", pod=~\"adservice.*|cartservice.*|checkoutservice.*|currencyservice.*|emailservice.*|frontend.*|paymentservice.*|productcatalogservice.*|recommendationservice.*|shippingservice.*|redis.*\", id=~\"/kubepods/.*\"}[5m]))",
               "hide": true,
               "interval": "",
               "intervalFactor": 1,
@@ -2375,7 +2375,7 @@ data:
             },
             {
               "exemplar": true,
-              "expr": "sum(rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubelet/.*\"}[5m]))",
+              "expr": "sum(rate(container_network_receive_bytes_total{image!~\"\",namespace=\"default\", pod!~\"loadgenerator-.*\", id=~\"/kubepods/.*\"}[5m]))",
               "hide": true,
               "interval": "",
               "legendFormat": "Sum",
@@ -2969,5 +2969,5 @@ data:
       "timezone": "browser",
       "title": "cAdvisor from Prometheus",
       "uid": "3t6ItUCMka",
-      "version": 5
+      "version": 3
     }
