@@ -127,6 +127,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: query
 spec:
+  type: LoadBalancer
   ports:
   - name: query
     port: 80
@@ -140,7 +141,6 @@ spec:
     app.kubernetes.io/name: jaeger
     app.kubernetes.io/instance: jaeger
     app.kubernetes.io/component: query
-  type: ClusterIP
 ---
 # Source: jaeger/templates/agent-ds.yaml
 apiVersion: apps/v1
@@ -259,11 +259,11 @@ spec:
                 operator: NotIn
                 values:
                 - meta-monitoring
-            - matchExpressions:
-              - key: layer
-                operator: In
-                values:
-                - observability
+            # - matchExpressions:
+            #   - key: layer
+            #     operator: In
+            #     values:
+            #     - observability
       securityContext:
         {}
       serviceAccountName: jaeger-collector
@@ -347,11 +347,11 @@ spec:
                 operator: NotIn
                 values:
                 - meta-monitoring
-            - matchExpressions:
-              - key: layer
-                operator: In
-                values:
-                - observability
+            # - matchExpressions:
+            #   - key: layer
+            #     operator: In
+            #     values:
+            #     - observability
       securityContext:
         {}
       serviceAccountName: jaeger-query

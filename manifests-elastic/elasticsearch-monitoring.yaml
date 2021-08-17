@@ -89,7 +89,7 @@ spec:
       - ReadWriteOnce
       resources:
         requests:
-          storage: 1Gi
+          storage: 100Gi
   template:
     metadata:
       name: "elasticsearch-monitoring-master"
@@ -123,11 +123,11 @@ spec:
                 operator: NotIn
                 values:
                 - meta-monitoring
-            - matchExpressions:
-              - key: layer
-                operator: In
-                values:
-                - observability
+            # - matchExpressions:
+            #   - key: layer
+            #     operator: In
+            #     values:
+            #     - observability
       terminationGracePeriodSeconds: 120
       volumes:
       enableServiceLinks: true

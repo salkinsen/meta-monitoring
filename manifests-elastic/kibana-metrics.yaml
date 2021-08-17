@@ -56,11 +56,11 @@ spec:
                 operator: NotIn
                 values:
                 - meta-monitoring
-            - matchExpressions:
-              - key: layer
-                operator: In
-                values:
-                - observability
+            # - matchExpressions:
+            #   - key: layer
+            #     operator: In
+            #     values:
+            #     - observability
       containers:
       - name: kibana-metrics
         securityContext:
@@ -116,6 +116,6 @@ spec:
             cpu: 1000m
             memory: 2Gi
           requests:
-            cpu: 1000m
+            cpu: 250m
             memory: 2Gi
         volumeMounts:
