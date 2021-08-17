@@ -7,7 +7,7 @@ metadata:
   annotations:
   labels:
     app: "filebeat-filebeat"
-    chart: "filebeat-7.11.2"
+    chart: "filebeat-7.13.0"
     heritage: "Helm"
     release: "filebeat"
 ---
@@ -18,7 +18,7 @@ metadata:
   name: filebeat-filebeat-daemonset-config
   labels:
     app: "filebeat-filebeat"
-    chart: "filebeat-7.11.2"
+    chart: "filebeat-7.13.0"
     heritage: "Helm"
     release: "filebeat"
 data:
@@ -45,7 +45,7 @@ metadata:
   name: filebeat-filebeat-cluster-role
   labels:
     app: "filebeat-filebeat"
-    chart: "filebeat-7.11.2"
+    chart: "filebeat-7.13.0"
     heritage: "Helm"
     release: "filebeat"
 rules: 
@@ -67,7 +67,7 @@ metadata:
   name: filebeat-filebeat-cluster-role-binding
   labels:
     app: "filebeat-filebeat"
-    chart: "filebeat-7.11.2"
+    chart: "filebeat-7.13.0"
     heritage: "Helm"
     release: "filebeat"
 roleRef:
@@ -86,7 +86,7 @@ metadata:
   name: filebeat-filebeat
   labels:
     app: "filebeat-filebeat"
-    chart: "filebeat-7.11.2"
+    chart: "filebeat-7.13.0"
     heritage: "Helm"
     release: "filebeat"
 spec:
@@ -106,7 +106,7 @@ spec:
       name: "filebeat-filebeat"
       labels:
         app: "filebeat-filebeat"
-        chart: "filebeat-7.11.2"
+        chart: "filebeat-7.13.0"
         heritage: "Helm"
         release: "filebeat"
     spec:
@@ -146,7 +146,7 @@ spec:
           path: /var/run/docker.sock
       containers:
       - name: "filebeat"
-        image: "docker.elastic.co/beats/filebeat:7.11.2"
+        image: "docker.elastic.co/beats/filebeat:7.13.0"
         imagePullPolicy: "IfNotPresent"
         args:
         - "-e"
@@ -211,7 +211,7 @@ spec:
           mountPath: /var/log
           readOnly: true
         # Necessary when using autodiscovery; avoid mounting it otherwise
-        # See: https://www.elastic.co/guide/en/beats/filebeat/7.11/configuration-autodiscover.html
+        # See: https://www.elastic.co/guide/en/beats/filebeat/7.13/configuration-autodiscover.html
         - name: varrundockersock
           mountPath: /var/run/docker.sock
           readOnly: true

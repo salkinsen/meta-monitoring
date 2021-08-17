@@ -74,6 +74,10 @@ spec:
         env:
           - name: ELASTICSEARCH_HOSTS
             value: "http://elasticsearch-logging-master:9200"
+          - name: SERVER_HOST
+            value: "0.0.0.0"
+          - name: NODE_OPTIONS
+            value: --max-old-space-size=1800
         readinessProbe:
           failureThreshold: 3
           initialDelaySeconds: 10

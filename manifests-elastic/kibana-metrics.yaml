@@ -69,11 +69,15 @@ spec:
             - ALL
           runAsNonRoot: true
           runAsUser: 1000
-        image: "docker.elastic.co/kibana/kibana:7.11.2"
+        image: "docker.elastic.co/kibana/kibana:7.13.0"
         imagePullPolicy: "IfNotPresent"
         env:
           - name: ELASTICSEARCH_HOSTS
             value: "http://elasticsearch-monitoring-master:9200"
+          - name: SERVER_HOST
+            value: "0.0.0.0"
+          - name: NODE_OPTIONS
+            value: --max-old-space-size=1800
         readinessProbe:
           failureThreshold: 3
           initialDelaySeconds: 10

@@ -7,7 +7,7 @@ metadata:
   annotations:
   labels:
     app: "metricbeat-metricbeat"
-    chart: "metricbeat-7.11.2"
+    chart: "metricbeat-7.13.0"
     heritage: "Helm"
     release: "metricbeat"
 ---
@@ -18,7 +18,7 @@ metadata:
   name: metricbeat-metricbeat-daemonset-config
   labels:
     app: "metricbeat-metricbeat"
-    chart: "metricbeat-7.11.2"
+    chart: "metricbeat-7.13.0"
     heritage: "Helm"
     release: "metricbeat"
 data:
@@ -79,7 +79,7 @@ data:
 #   name: metricbeat-metricbeat-deployment-config
 #   labels:
 #     app: "metricbeat-metricbeat"
-#     chart: "metricbeat-7.11.2"
+#     chart: "metricbeat-7.13.0"
 #     heritage: "Helm"
 #     release: "metricbeat"
 # data:
@@ -105,7 +105,7 @@ metadata:
   name: metricbeat-metricbeat-cluster-role
   labels:
     app: "metricbeat-metricbeat"
-    chart: "metricbeat-7.11.2"
+    chart: "metricbeat-7.13.0"
     heritage: "Helm"
     release: "metricbeat"
 rules: 
@@ -153,7 +153,7 @@ metadata:
   name: metricbeat-metricbeat-cluster-role-binding
   labels:
     app: "metricbeat-metricbeat"
-    chart: "metricbeat-7.11.2"
+    chart: "metricbeat-7.13.0"
     heritage: "Helm"
     release: "metricbeat"
 roleRef:
@@ -172,7 +172,7 @@ metadata:
   name: metricbeat-metricbeat
   labels:
     app: "metricbeat-metricbeat"
-    chart: "metricbeat-7.11.2"
+    chart: "metricbeat-7.13.0"
     heritage: "Helm"
     release: "metricbeat"
 spec:
@@ -190,7 +190,7 @@ spec:
       name: "metricbeat-metricbeat"
       labels:
         app: "metricbeat-metricbeat"
-        chart: "metricbeat-7.11.2"
+        chart: "metricbeat-7.13.0"
         heritage: "Helm"
         release: "metricbeat"
     spec:
@@ -230,7 +230,7 @@ spec:
           path: /sys/fs/cgroup
       containers:
       - name: "metricbeat"
-        image: "docker.elastic.co/beats/metricbeat:7.11.2"
+        image: "docker.elastic.co/beats/metricbeat:7.13.0"
         imagePullPolicy: "IfNotPresent"
         args:
         - "-e"
@@ -308,7 +308,7 @@ spec:
 #   name: 'metricbeat-metricbeat-metrics'
 #   labels:
 #     app: 'metricbeat-metricbeat-metrics'
-#     chart: 'metricbeat-7.11.2'
+#     chart: 'metricbeat-7.13.0'
 #     heritage: 'Helm'
 #     release: 'metricbeat'
 # spec:
@@ -324,7 +324,7 @@ spec:
 #         configChecksum: 602d9a7454d28c365352a9d4abdad368abd549bc16342ab0eacd4ebe623218f
 #       labels:
 #         app: 'metricbeat-metricbeat-metrics'
-#         chart: 'metricbeat-7.11.2'
+#         chart: 'metricbeat-7.13.0'
 #         release: 'metricbeat'
 #     spec:
 #       affinity: 
@@ -349,7 +349,7 @@ spec:
 #           name: metricbeat-metricbeat-deployment-config
 #       containers:
 #       - name: "metricbeat"
-#         image: "docker.elastic.co/beats/metricbeat:7.11.2"
+#         image: "docker.elastic.co/beats/metricbeat:7.13.0"
 #         imagePullPolicy: "IfNotPresent"
 #         args:
 #           - "-e"
