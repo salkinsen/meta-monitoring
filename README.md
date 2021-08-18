@@ -52,3 +52,14 @@ kubectl get pods --all-namespaces -o wide
 
 ## check if default namespace is clear
 kubectl get pods; kubectl get pvc; kubectl get pv
+
+# check metrics of jaeger agent
+kubectl port-forward <jaeger-agent-pod> :14271
+go to address and append /metrics
+
+# check metrics of jaeger collector
+kubectl port-forward <jaeger-collector-pod> :14269
+go to address and append /metrics
+
+# example for useful command to search for error messages regarding dropped spans
+kubectl logs checkoutservice-6c77694b4-ltn2l | grep -E -i "(spans|span|drop|dropped|queue|max)"
