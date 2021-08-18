@@ -241,8 +241,8 @@ spec:
             value: "elasticsearch"
           - name: network.host
             value: "0.0.0.0"
-          - name: ES_JAVA_OPTS
-            value: "-Xmx1g -Xms1g"
+          # - name: ES_JAVA_OPTS
+          #   value: "-Xmx1g -Xms1g"
           - name: node.data
             value: "true"
           - name: node.ingest
