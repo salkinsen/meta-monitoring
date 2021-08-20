@@ -7,7 +7,7 @@ Check state of cluster, might be problematic!"
 
 echo "----------------SCENARIO 3 STARTING----------------" | tee -a $outfile
 
-./deploytest.sh -r $outfile \
+./deploy.sh -r $outfile \
     -m ../../microservices-demo/kubernetes-manifests/microservices-no-tracing/ \
     -l ../../microservices-demo/kubernetes-manifests/loadgenerator/loadgenerator100.yaml \
     -o ../manifests-observability/filebeat.yaml \
