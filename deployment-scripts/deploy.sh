@@ -18,7 +18,7 @@ setup_elasticsearch() {
       deploy_es_str+="-f $val "
   done &&
   kubectl apply $deploy_es_str &&
-  echo "Started elasticsearch"
+  printf "Started elasticsearch\n"
 }
 
 setup_observability() {
@@ -27,7 +27,7 @@ setup_observability() {
       deploy_obs_str+="-f $val "
   done &&
   kubectl apply $deploy_obs_str &&
-  echo "Started observability, waiting 10 minutes ..." &&
+  printf "Started observability, waiting 10 minutes ...\n" &&
   sleep 10m
 }
 
@@ -36,10 +36,10 @@ setup_microservices_loadgen() {
       deploy_ms_str+="-f $val "
   done &&
   kubectl apply $deploy_ms_str &&
-  echo "Started microservices, waiting 5 minutes before deploying loadgenerator ..." &&
+  printf "Started microservices, waiting 5 minutes before deploying loadgenerator ...\n" &&
   sleep 5m &&
   kubectl apply -f $loadgen &&
-  echo "Started loadgenerator, waiting 10 minutes ..." &&
+  printf "Started loadgenerator, waiting 10 minutes ...\n" &&
   sleep 10m
 }
 
@@ -47,7 +47,7 @@ setup_microservices_loadgen() {
 # --- Get flag arguments -----
 #-----------------------------
 
-while getopts 'o:m:r:l:' flag; do
+while getopts 'o:m:r:l:e:' flag; do
     case "${flag}" in
         r)  outfile="${OPTARG}";;
         o)  obs+=("${OPTARG}");;
@@ -60,19 +60,19 @@ while getopts 'o:m:r:l:' flag; do
 done
 
 if [ -z "${outfile}" ] || [ -z "$ms" ] || [ -z "${loadgen}" ]; then
-    echo 'Missing -r or -m or -l' >&2
+    printf 'Missing -r or -m or -l\n' >&2
     usage
     exit 1
 fi
 
-if [ -n "$obs" ] && [ -z "$es"]; then
-  echo "specified observability, but not elasticsearch"
-  echo "that can't be, check arguments."
+if [ -n "$obs" ] && [ -z "$es" ]; then
+  printf "specified observability, but not elasticsearch\n"
+  printf "that can't be, check arguments.\n"
   usage
   exit 1
 fi
 
-echo "Starting setup, current time:" | tee -a $outfile &&
+printf "Starting setup, current time:\n" | tee -a $outfile &&
 date +"%Y-%m-%d %T" | tee -a $outfile &&
 
 #-----------------------------------
@@ -84,7 +84,7 @@ if [ -n "$obs" ]; then
 fi
 
 if [ $? -ne 0 ]; then
-  echo "failed to setup observability, aborting ..."
+  printf "failed to setup observability, aborting ...\n"
   exit 1
 fi
 
@@ -96,12 +96,12 @@ fi
 setup_microservices_loadgen
 
 if [ $? -ne 0 ]; then
-  echo "failed to setup microservices or loadgenerator, aborting ..."
+  printf "failed to setup microservices or loadgenerator, aborting ...\n"
   exit 1
 fi
 
-echo "Everything setup!" &&
-echo "START of main measurement phase. Current time:" | tee -a $outfile &&
+printf "Everything setup!\n" &&
+printf "START of main measurement phase. Current time:\n" | tee -a $outfile &&
 date +"%Y-%m-%d %T" | tee -a $outfile &&
 sleep 15m &&
 
@@ -109,23 +109,29 @@ sleep 15m &&
 # --- Stop everything exept ES--------
 #-------------------------------------
 
-echo "END of main measurement phase. Current time:" | tee -a $outfile &&
-date +"%Y-%m-%d %T" | tee -a $outfile &&
-kubectl delete -f $loadgen &&
-kubectl delete $deploy_ms_str
+printf "END of main measurement phase. Current time:\n" | tee -a $outfile &&
+date +"%Y-%m-%d %T" | tee -a $outfile
 
 
 if [ $? -ne 0 ]; then
-  echo "Something went wrong between setup and deleting ms/loadgen, aborting ..."
+  printf "Something went wrong after setup and before deleting observability, aborting ...\n"
   exit 1
 fi
 
 if [ -n "$deploy_obs_str" ]; then
-  kubectl delete -f $deploy_obs_str
+  kubectl delete $deploy_obs_str
 fi
 
 if [ $? -ne 0 ]; then
-  echo "failed to delete observability, aborting ..."
+  printf "failed to delete observability, aborting ...\n"
+  exit 1
+fi
+
+kubectl delete -f $loadgen &&
+kubectl delete $deploy_ms_str
+
+if [ $? -ne 0 ]; then
+  printf "failed to delete ms/loadgen, aborting ...\n"
   exit 1
 fi
 
@@ -137,16 +143,16 @@ if [ -z "$es" ]; then
 fi
 
 
-echo "Everything except elasticsearch should now be stopped, waiting 10 min ..." &&
+printf "Everything except elasticsearch should now be stopped, waiting 10 min ...\n" &&
 sleep 10m &&
-echo "10m since everything except ES has been stopped" &&
-echo "Measure Elasticsearch-PV (used bytes) here:" | tee -a $outfile &&
+printf "10m since everything except ES has been stopped\n" &&
+printf "Measure Elasticsearch-PV (used bytes) here:\n" | tee -a $outfile &&
 date +"%Y-%m-%d %T" | tee -a $outfile
 
 if [ $? -ne 0 ]; then
-  echo "something went wrong after ms and obs have been stopped."
-  echo "but before final cleanup."
-  echo "aborting ..."
+  printf "something went wrong after ms and obs have been stopped.\n"
+  printf "but before final cleanup.\n"
+  printf "aborting ...\n"
   exit 1
 fi
 
@@ -156,12 +162,12 @@ fi
 #-------------------------
 
 if [ -n "$es" ]; then
-  echo "deleting elasticsearch"
+  printf "deleting elasticsearch\n"
   kubectl delete $deploy_es_str
 fi
 
 if [ $? -ne 0 ]; then
-  echo "failed to delete elasticsearch, aborting ..."
+  printf "failed to delete elasticsearch, aborting ...\n"
   exit 1
 fi
 
