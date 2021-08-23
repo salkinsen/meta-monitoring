@@ -1,13 +1,16 @@
 #!/bin/bash
 
-outfile=reports/scenario3.txt
+scenario_name=scenario3
+
+outfile=reports/"$scenario_name".txt
+loadgen_csv=reports/loadgen-"$scenario_name".csv
 
 error_msg="Something went wrong, aborted the rest! \
 Check state of cluster, might be problematic!"
 
 echo "----------------SCENARIO 3 STARTING----------------" | tee -a $outfile
 
-./deploy.sh -r $outfile \
+./deploy.sh -r $outfile -c $loadgen_csv \
     -m ../../microservices-demo/kubernetes-manifests/microservices-no-tracing/ \
     -l ../../microservices-demo/kubernetes-manifests/loadgenerator/loadgenerator100.yaml \
     -o ../manifests-observability/filebeat.yaml \

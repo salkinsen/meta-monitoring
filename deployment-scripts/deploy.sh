@@ -6,6 +6,7 @@
 usage() {
   printf "Usage:\n
     use -r flag to give name for output-report file (required).\n
+    use -c flag to give name for output-csv file from loadgenerator (required).\n
     use -o flag to specify file/folder options for observability yaml files (optional).\n
     use -e flag to specify file/folder options for elasticsearch yaml files (optional).\n
     use -m flag to specify file/folder options for microservice yaml files (required).\n
@@ -47,20 +48,21 @@ setup_microservices_loadgen() {
 # --- Get flag arguments -----
 #-----------------------------
 
-while getopts 'o:m:r:l:e:' flag; do
+while getopts 'o:m:r:l:e:c:' flag; do
     case "${flag}" in
         r)  outfile="${OPTARG}";;
         o)  obs+=("${OPTARG}");;
         m)  ms+=("${OPTARG}");;
         e)  es+=("${OPTARG}");;
         l)  loadgen="${OPTARG}";;
+        c)  csv="${OPTARG}";;
         *)  usage
             exit 1 ;;
   esac
 done
 
-if [ -z "${outfile}" ] || [ -z "$ms" ] || [ -z "${loadgen}" ]; then
-    printf 'Missing -r or -m or -l\n' >&2
+if [ -z "${outfile}" ] || [ -z "$ms" ] || [ -z "${loadgen}" ] || [ -z "${csv}" ]; then
+    printf 'Missing -r or -m or -l or -c\n' >&2
     usage
     exit 1
 fi
@@ -124,6 +126,13 @@ fi
 
 if [ $? -ne 0 ]; then
   printf "failed to delete observability, aborting ...\n"
+  exit 1
+fi
+
+./loadgen-get-csv.sh -c "${csv}"
+
+if [ $? -ne 0 ]; then
+  printf "failed to extract csv file from loadgenerator, something is wrong, aborting ...\n"
   exit 1
 fi
 
