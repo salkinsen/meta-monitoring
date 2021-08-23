@@ -32,7 +32,7 @@ loadgen_pod_name=$(kubectl get pods --template '{{range .items}}{{.metadata.name
 # echo "$loadgen_pod_name"
 # kubectl exec "$loadgen_pod_name" -- ls -la /
 
-"Extracting csv-file from loadgenerator ...\n"
+printf "Extracting csv-file from loadgenerator ...\n"
 kubectl cp default/"$loadgen_pod_name":loadgen_stats_history.csv "${csv}"
 
 if [ $? -eq 1 ]; then
