@@ -1,6 +1,6 @@
 #!/bin/bash
 
-scenario_name=scenario1
+scenario_name=scenario01
 
 outfile=reports/"$scenario_name".txt
 loadgen_csv=reports/loadgen-"$scenario_name".csv

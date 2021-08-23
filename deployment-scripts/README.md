@@ -6,3 +6,7 @@ Important: For these scripts to work, this repository (meta-monitoring) needs be
 ├──  meta-monitoring
 ```
 
+Some of the scripts need jq. It can been installed e.g. via snap:
+```bash
+sudo snap install jq
+```

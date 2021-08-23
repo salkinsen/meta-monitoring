@@ -103,6 +103,18 @@ if [ $? -ne 0 ]; then
 fi
 
 printf "Everything setup!\n" &&
+printf "Pods with restart count != 0 ---->:\n" | tee -a $outfile &&
+kubectl get pod -o=json \
+  | jq -r '.items[]|select(any( .status.containerStatuses[]; .restartCount!=0))|"\(.metadata.name)\t\t\(.status.containerStatuses[].restartCount)"' \
+  | tee -a $outfile &&
+printf "<----------------------------------\n" | tee -a $outfile
+
+if [ $? -ne 0 ]; then
+  printf "Something went wrong while trying to get restart statuses of pods. 
+    Check if jq is installed. Aborting ..."
+  exit 1
+fi
+
 printf "START of main measurement phase. Current time:\n" | tee -a $outfile &&
 date +"%Y-%m-%d %T" | tee -a $outfile &&
 sleep 15m &&
@@ -117,6 +129,18 @@ date +"%Y-%m-%d %T" | tee -a $outfile
 
 if [ $? -ne 0 ]; then
   printf "Something went wrong after setup and before deleting observability, aborting ...\n"
+  exit 1
+fi
+
+printf "Pods with restart count != 0 ---->:\n" | tee -a $outfile &&
+kubectl get pod -o=json \
+  | jq -r '.items[]|select(any( .status.containerStatuses[]; .restartCount!=0))|"\(.metadata.name)\t\t\(.status.containerStatuses[].restartCount)"' \
+  | tee -a $outfile &&
+printf "<----------------------------------\n" | tee -a $outfile
+
+if [ $? -ne 0 ]; then
+  printf "Something went wrong while trying to get restart statuses of pods. 
+    Check if jq is installed. Aborting ..."
   exit 1
 fi
 
