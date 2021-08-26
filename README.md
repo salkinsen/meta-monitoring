@@ -1,3 +1,10 @@
+# meta-monitoring
+This project is an attempt to measure the resource costs of observability in a microservice context.
+
+The Kubernetes manifest files for Elasticsearch, Filebeat, Metricbeat and Kibana were created by using the official [Elastic Helm charts](https://github.com/elastic/helm-charts). Since most of Helms functionality wasn't needed for this project, the charts were rendered (with [helm template](https://helm.sh/docs/helm/helm_template/)) into yaml files with the standard values. They were then modified for integration, where necessary.
+
+The same process was followed regarding the official [Jaeger Helm charts](https://github.com/jaegertracing/helm-charts).
+
 # Prerequisites
 
 Some of the scripts in the folder deployment-scripts need jq. It can been installed e.g. via snap:
@@ -5,10 +12,8 @@ Some of the scripts in the folder deployment-scripts need jq. It can been instal
 sudo snap install jq
 ```
 
-# meta-monitoring
-This project is an attempt to measure the resource costs of observability in a microservice context.
 
-## Test with kind
+# Test with kind
 kind create cluster --config kind-config.yaml  
 load images into cluster if present:  
 kind load docker-image docker.elastic.co/elasticsearch/elasticsearch:7.13.0 docker.elastic.co/beats/filebeat:7.13.0 docker.elastic.co/kibana/kibana:7.13.0 docker.elastic.co/beats/metricbeat:7.13.0
@@ -47,13 +52,13 @@ kubectl get pods --all-namespaces -o wide
 ## check if default namespace is clear
 kubectl get pods; kubectl get pvc; kubectl get pv
 
-# check metrics of jaeger agent
+## check metrics of jaeger agent
 kubectl port-forward <jaeger-agent-pod> :14271
 go to address and append /metrics
 
-# check metrics of jaeger collector
+## check metrics of jaeger collector
 kubectl port-forward <jaeger-collector-pod> :14269
 go to address and append /metrics
 
-# example for useful command to search for error messages regarding dropped spans
+## example for useful command to search for error messages regarding dropped spans
 kubectl logs checkoutservice-6c77694b4-ltn2l | grep -E -i "(spans|span|drop|dropped|queue|max)"
