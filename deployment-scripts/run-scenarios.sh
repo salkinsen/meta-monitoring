@@ -11,6 +11,21 @@ scenarios=(
     scenario08.sh
 )
 
+check_reports_folder() {
+    if [ -z "$(ls ./reports)" ]; then
+        return    
+    fi
+    echo "Directory ./reports contains visible files. They might get overwritten."
+    echo "Do you want to continue anyway? (Press y/Y to continue or something else to abort.)"
+    read -n 1 -r
+    echo    # move to a new line
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        exit 1
+    fi
+}
+
+check_reports_folder
+
 for i in ${!scenarios[@]}
 do
     if [ $i != 0 ]; then

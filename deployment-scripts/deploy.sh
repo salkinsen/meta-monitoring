@@ -4,13 +4,13 @@
 # It is called from the scenario-scripts.
 
 usage() {
-  printf "Usage:\n
-    use -r flag to give name for output-report file (required).\n
-    use -c flag to give name for output-csv file from loadgenerator (required).\n
-    use -o flag to specify file/folder options for observability yaml files (optional).\n
-    use -e flag to specify file/folder options for elasticsearch yaml files (optional).\n
-    use -m flag to specify file/folder options for microservice yaml files (required).\n
-    use -l flag to specify file/folder options for loadgenerator yaml file (required).\n
+  printf "Usage:
+    use -r flag to give name for output-report file (required).
+    use -c flag to give name for output-csv file from loadgenerator (required).
+    use -o flag to specify file/folder options for observability yaml files (optional).
+    use -e flag to specify file/folder options for elasticsearch yaml files (optional).
+    use -m flag to specify file/folder options for microservice yaml files (required).
+    use -l flag to specify file/folder options for loadgenerator yaml file (required).
     e.g $0 -r scenario1-report.txt -o ../manifests-observability/ -m ../../microservices-demo/kubernetes-manifests/microservices-tracing \n"
 }
 
