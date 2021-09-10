@@ -36,3 +36,9 @@ Scenario 01 - 08 have a load of 100 req/s.
 | Scenario12 | Logging - 75 load  | Like "Just Logging", but with a load of 75 req/s. |
 | Scenario13 | Logging - 50 load  | Like "Just Logging", but with a load of 50 req/s. |
 | Scenario14 | Logging - 25 load  | Like "Just Logging", but with a load of 25 req/s. |
+| Scenario15 | Metrics - 75 load  | Like "Just Metrics", but with a load of 75 req/s. |
+| Scenario16 | Metrics - 50 load  | Like "Just Metrics", but with a load of 50 req/s. |
+| Scenario17 | Metrics - 25 load  | Like "Just Metrics", but with a load of 25 req/s. |
+| Scenario18 | No Observability - 75 load  | Like "No Observability", but with a load of 75 req/s. |
+| Scenario19 | No Observability - 50 load  | Like "No Observability", but with a load of 50 req/s. |
+| Scenario20 | No Observability - 25 load  | Like "No Observability", but with a load of 25 req/s. |
