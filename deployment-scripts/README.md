@@ -11,7 +11,26 @@ Some of the scripts need jq. It can been installed e.g. via snap:
 sudo snap install jq
 ```
 
-# Main Scenarios
+Run a scenario via its script or run multiple scenarios with the `run-scenarios.sh`-script.
+The scenarios will create reports in the [./reports](./reports)-folder that can be used to check if everything went accordingly. These files will also contain timestamps that can be used to export the measurement CSV files for the correct time periods through Grafana. CSV files from the load generator, containing information about latencies, will also be created there.
+
+The scenarios follow these steps (depending on the scenario, some steps might be skipped). The wait times were chosen to give the containers time to stabilize.
+
+* Start all observability resources.
+* Wait 10 minutes to stabilize.
+* Start all microservices.
+* Wait 5 minutes.
+* Start the load generator.
+* Wait 10 minutes.
+* Start of main measurement phase, record timestamp.
+* Wait 15 minutes (main measurement phase).
+* End of main measurement phase, record timestamp. 
+* Stop all resources except for the Elasticsearch instances (to provoke the drop that is descriped in section 6.4 of the thesis).
+* Wait 10 minutes.
+* Record timestamp. This timestamp should be used for the measurements for Elasticsearch's persistent volumes.
+* Clean up and prepare for next scenario.
+
+## Main Scenarios
 
 Scenario 01 - 08 have a load of 100 req/s.
 
@@ -26,7 +45,7 @@ Scenario 01 - 08 have a load of 100 req/s.
 | Scenario07 | Tracing 10 \%  | Like "Just Tracing", but with 10 \% sampling. |
 | Scenario08 | Tracing 1 \%  | Like "Just Tracing", but with 1 \% sampling. |
 
-# Variations with different loads
+## Variations with different loads
 
 | Scenario | Short Name | Description |
 | ------------- | ------------- | ------------- |
