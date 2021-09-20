@@ -1,36 +1,16 @@
 #!/bin/bash
 
-# scenarios=(
-#     scenario01.sh
-#     scenario02.sh
-#     scenario03.sh
-#     scenario04.sh
-#     scenario05.sh
-#     scenario06.sh
-#     scenario07.sh
-#     scenario08.sh
-# )
-
-# scenarios=(
-#     scenario09.sh
-#     scenario10.sh
-#     scenario11.sh
-#     scenario12.sh
-#     scenario13.sh
-#     scenario14.sh
-# )
-
-# scenarios=(
-#     scenario15.sh
-#     scenario16.sh
-#     scenario17.sh
-# )
-
 scenarios=(
-    scenario18.sh
-    scenario19.sh
-    scenario20.sh
+    scenario01.sh
+    scenario02.sh
+    scenario03.sh
+    scenario04.sh
+    scenario05.sh
+    scenario06.sh
+    scenario07.sh
+    scenario08.sh
 )
+
 
 check_reports_folder() {
     if [ -z "$(ls ./reports)" ]; then
