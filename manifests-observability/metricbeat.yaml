@@ -44,10 +44,6 @@ data:
         #- /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt
       processors:
       - add_kubernetes_metadata: ~
-    # - module: kubernetes
-    #   enabled: true
-    #   metricsets:
-    #     - event
     - module: system
       period: 10s
       metricsets:
@@ -55,20 +51,6 @@ data:
         - load
         - memory
         - network
-        # - process
-        # - process_summary
-      # processes: ['.*']
-      # process.include_top_n:
-      #   by_cpu: 5
-      #   by_memory: 5
-    # - module: system
-    #   period: 1m
-    #   metricsets:
-    #     - filesystem
-    #     - fsstat
-    #   processors:
-    #   - drop_event.when.regexp:
-    #       system.filesystem.mount_point: '^/(sys|cgroup|proc|dev|etc|host|lib)($|/)'
     output.elasticsearch:
       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-monitoring-master:9200}'
 ---
